@@ -1,29 +1,8 @@
 var cheerio = require('cheerio'),
-    fs = require('fs');
+    fs = require('fs'),
+    writeCsv = require('./write_csv');
 
-
-function writeCsv(rows){
-    var keys = Object.keys(rows[0]);
-
-    var csv_data = [keys.join(',')];
-
-    rows.forEach(function (row) {
-        var data = [];
-
-        keys.forEach(function (key) {
-            data.push(row[key]);
-        });
-
-         csv_data.push(data.join(','));
-    });
-
-    csv_data = csv_data.join('\n');
-
-    fs.writeFile('Ironman 70.3 EagleMan Triathlon 2012.txt', csv_data);
-}
-
-function scrapeData(err, data) {
-      if (err) return console.error(err);
+module.exports = function scrapeData(data) {
 
       var $ = cheerio.load(data);
 
@@ -84,9 +63,7 @@ function scrapeData(err, data) {
         });
       });
 
-    writeCsv(rows);
-  }
+    writeCsv('Ironman 70.3 EagleMan Triathlon 2012.txt', rows);
+  };
 
-
-fs.readFile('EagleMan_Triathlon_2012_Race_Results @ Athlinks.com.html', 'utf8', scrapeData);
 
