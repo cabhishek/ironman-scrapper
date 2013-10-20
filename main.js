@@ -14,7 +14,6 @@ function run(page, callback){
         console.log('Page number ->' + page);
 
         http.get(url, function(raw_html, err){
-            if(err) console.log(err);
 
             var data = scrapeData(raw_html);
 
@@ -24,9 +23,11 @@ function run(page, callback){
 
 var athlink_pages = ['A1', 'A2', 'A3', 'A4', 'A5', 'A6', 'A7', 'A8', 'A9', 'A10', 'A11', 'A12', 'A13', 'A14'];
 
+
 async.concat(athlink_pages, run, function(err, results){
+
     console.log('Total data row to write ->' + results.length);
 
-    writeCsv('Ironman 70.3 EagleMan Triathlon 2012.txt', results);
+    writeCsv('Ironman_70.3_EagleMan_Triathlon_2012_v2.txt', results);
 });
 
