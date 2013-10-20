@@ -1,6 +1,5 @@
 var cheerio = require('cheerio'),
-    fs = require('fs'),
-    writeCsv = require('./write_csv');
+    fs = require('fs');
 
 module.exports = function scrapeData(data) {
 
@@ -11,6 +10,8 @@ module.exports = function scrapeData(data) {
       $('#divResults .clsResult').map(function(){
 
         var row = $(this);
+
+        // Structured as per data found @ http://athlinks.com/time.aspx?eventid=115006&courseid=156044&genderpage=A14
 
         var a = row.find(':nth-child(2)').text();
         var g = row.find(':nth-child(3)').text();
@@ -63,7 +64,7 @@ module.exports = function scrapeData(data) {
         });
       });
 
-    writeCsv('Ironman 70.3 EagleMan Triathlon 2012.txt', rows);
+    return rows;
   };
 
 
