@@ -38,20 +38,6 @@ var races = [{
     courseid:234026,
     year: 2012,
     lastpage:4
-},
-{
-    name : "Ironman Australia",
-    eventid: 123206,
-    courseid:167877,
-    year: 2011,
-    lastpage:4
-},
-{
-    name : "Ironman Australia",
-    eventid: 99550,
-    courseid:137618,
-    year: 2006,
-    lastpage:4
 }];
 
 races.forEach(function(race){
