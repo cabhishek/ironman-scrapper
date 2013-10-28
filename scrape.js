@@ -20,7 +20,7 @@ module.exports = function scrapeData(data) {
         var athlete = row.find(':nth-child(5)').text();
 
         var m_f = row.find(':nth-child(6)').text();
-        var a_2 = row.find(':nth-child(7)').text();
+        var age = row.find(':nth-child(7)').text();
         var bib = row.find(':nth-child(8)').text();
 
         var swim_time = row.find(':nth-child(9)').text();
@@ -47,7 +47,7 @@ module.exports = function scrapeData(data) {
             "O": o,
             "Athelete": athlete,
             "M/F": m_f,
-            "A2": a_2,
+            "Age": age,
             "Bib": bib,
             "Swim_Time": swim_time,
             "Swim_Pace": swim_pace,
