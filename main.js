@@ -1,67 +1,39 @@
-var http = require('client-http'),
+var raceHistory = require('./races/raceHistory'),
     scrapeData = require('./scrape'),
-    writeCsv = require('./write_csv'),
+    writeCsv = require('./writeCsv'),
+    getFolderName = require('./helper').getFolderName,
+    getFileName = require('./helper').getFileName,
+    http = require('client-http'),
     _s = require('underscore.string'),
     _ = require('underscore'),
     async = require('async'),
+    mkdirp = require('mkdirp'),
     fs = require('fs');
 
-var base_url = 'http://athlinks.com/time.aspx';
+var raceName = "Ironman Florida";
 
-function get_data(race, callback){
+var history = raceHistory(raceName);
 
-        var params = _s.sprintf("?eventid=%s&courseid=%s&genderpage=%s", race.eventid, race.courseid, race.page);
+history.forEach(function(race){
 
-        var url = base_url + params;
+    var foldername  = getFolderName(race);
+    var filename = getFileName(race);
 
-        console.log('Getting data from ->' + url);
-        console.log('Page number ->' + race.page);
+    fs.readFile(foldername + '/' + filename, function(err, raw_html){
+        var data = scrapeData(raw_html);
 
-        http.get(url, function(raw_html, err){
+        mkdirp(foldername + '/data', function(err){
 
-            var data = scrapeData(raw_html);
+            var dataFile = _s.underscored(_s.sprintf('%s/data/%s_%s.csv', foldername, race.name, race.year));
 
-            return callback(err, data);
+            writeCsv(dataFile, data);
+
+            console.log('Done saving ->' + dataFile);
         });
-}
-
-var races = [{
-    name : "Ironman Asia-Pacific Championship",
-    eventid: 176220,
-    courseid:242050,
-    year:2012,
-    lastpage:4
-},
-{
-    name : "Ironman South Africa",
-    eventid: 170929,
-    courseid:234026,
-    year: 2012,
-    lastpage:4
-}];
-
-races.forEach(function(race){
-
-    var athlink_races = [];
-    var pages = _.range(1, race.lastpage + 1);
-
-    pages.forEach(function(page){
-
-        var gender_page = _s.sprintf('A%s', page);
-        var cloned_race = _.clone(race);
-
-        athlink_races.push(_.extend(cloned_race, {page:gender_page}));
-    });
-
-    // console.log('athlink_races ->'+ athlink_races);
-
-    async.concat(athlink_races, get_data, function(err, results){
-
-        console.log('Total data row to write ->' + results.length);
-
-        writeCsv(_s.underscored(_s.sprintf('%s_%s.txt', race.name, race.year)), results);
 
     });
 });
+
+
 
 
