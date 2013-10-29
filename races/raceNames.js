@@ -1,6 +1,6 @@
-var raceNames =  [ "Ironman Florida"
-                    // "Ironman Arizona",
-                    // "Ironman Cozumel",
+var raceNames =  [ "Ironman Florida",
+                    "Ironman Arizona",
+                    "Ironman Cozumel"
                     // "Ironman Western Australia",
                     // "Ironman New Zealand",
                     // "Ironman Asia-Pacific Championship",
