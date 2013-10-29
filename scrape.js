@@ -64,6 +64,8 @@ module.exports = function scrapeData(data) {
         });
       });
 
+    // console.log(rows);
+
     return rows;
   };
 
