@@ -1,5 +1,5 @@
 var raceHistory = require('./races/raceHistory'),
-    scrapeData = require('./scrape'),
+    scrapeData = require('./scrapper/scrape'),
     writeCsv = require('./writeCsv'),
     getFolderName = require('./helper').getFolderName,
     getFileName = require('./helper').getFileName,
@@ -11,7 +11,7 @@ var raceHistory = require('./races/raceHistory'),
     fs = require('fs');
 
 
-var raceName = "Ironman Cozumel";
+var raceName = "Ironman Western Australia";
 
 var history = raceHistory(raceName);
 
@@ -21,7 +21,7 @@ history.forEach(function(race){
     var filename = getFileName(race);
 
     fs.readFile(foldername + '/' + filename, function(err, raw_html){
-        var data = scrapeData(raw_html);
+        var data = scrapeData(raw_html, race.scrappername);
 
         mkdirp(foldername + '/data', function(err){
 
