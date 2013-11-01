@@ -10,7 +10,7 @@ var raceHistory = require('./races/raceHistory'),
     mkdirp = require('mkdirp'),
     path = require('path');
 
-var raceName = "Ironman Australia";
+var raceName = "Ironman Cozumel";
 
 (function download(){
 

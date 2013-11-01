@@ -11,7 +11,7 @@ var raceHistory = require('./races/raceHistory'),
     fs = require('fs');
 
 
-var raceName = "Ironman Western Australia";
+var raceName = "Ironman Cozumel";
 
 var history = raceHistory(raceName);
 

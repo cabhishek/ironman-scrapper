@@ -1,4 +1,4 @@
-// Race year 2012, 2011, 2010 has different link and data strucuture
+// Race year 2011 has different link structure
 
 var cozumel = {
     "Ironman Cozumel" : [{
@@ -8,6 +8,24 @@ var cozumel = {
         mode: 'a',
         page:'M9',
         year:2009
+    },
+    {
+        name : "Ironman Cozumel",
+        eventid: 194227,
+        courseid:341419,
+        mode: 'a',
+        page:'M9',
+        year:2012,
+        scrappername: 'without_time'
+    },
+    {
+        name : "Ironman Cozumel",
+        eventid: 131036,
+        courseid:203596,
+        mode: 'a',
+        page:'M9',
+        year:2010,
+        scrappername: 'without_time'
     }]
 };
 
