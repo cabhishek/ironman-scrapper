@@ -34,7 +34,3 @@ history.forEach(function(race){
 
     });
 });
-
-
-
-
