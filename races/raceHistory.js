@@ -8,16 +8,17 @@ var floridaHistory = require('./florida').floridaHistory,
     _ = require('underscore');
 
 module.exports = function raceHistory(raceName){
-    var raceDatas = {};
+    var raceData = {};
 
-    _.extend(raceDatas, floridaHistory);
-    _.extend(raceDatas, arizonaHistory);
-    _.extend(raceDatas, cozumelHistory);
-    _.extend(raceDatas, westernAustraliaHistory);
-    _.extend(raceDatas, newZealandHistory);
-    _.extend(raceDatas, southAfricaHistory);
-    _.extend(raceDatas, australiaHistory);
+    //Add data of a particular race
+    _.extend(raceData, floridaHistory);
+    _.extend(raceData, arizonaHistory);
+    _.extend(raceData, cozumelHistory);
+    _.extend(raceData, westernAustraliaHistory);
+    _.extend(raceData, newZealandHistory);
+    _.extend(raceData, southAfricaHistory);
+    _.extend(raceData, australiaHistory);
 
-    return raceDatas[raceName];
+    return raceData[raceName];
 };
 

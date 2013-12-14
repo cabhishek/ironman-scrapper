@@ -1,9 +1,9 @@
 var cheerio = require('cheerio'),
     fs = require('fs');
 
-module.exports = function scrapeData(data) {
+module.exports = function scrapeData(rawHtml) {
 
-    var $ = cheerio.load(data);
+    var $ = cheerio.load(rawHtml);
 
     var rows = [];
 
@@ -42,8 +42,6 @@ module.exports = function scrapeData(data) {
         // var penalty_time = row.find(':nth-child(18)').text();
         // var penalty_pace = row.find(':nth-child(19)').text();
         // var penalty_a_g_o = row.find(':nth-child(20)').text();
-
-
 
         var final_time = row.find(':nth-child(18)').text();
 
