@@ -10,7 +10,7 @@ var helper = require('./helper'),
     fs = require('fs');
 
 
-var raceName = "Ironman Australia";
+var raceName = "Ironman Florida";
 
 var history = raceHistory(raceName);
 
