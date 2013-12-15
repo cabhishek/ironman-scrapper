@@ -21,9 +21,9 @@ function downloadData(racePage, callback) {
         fs.writeFile(racePage.folderName + '/' + fileName, raw_html, function(err) {
 
             if (err) {
-                console.log(err);
+                log.info(err);
             } else {
-                console.log(_s.sprintf("The %s was saved!", fileName));
+                log.info("The %s was saved!", fileName);
             }
         });
     });
@@ -80,7 +80,7 @@ function getRaceData(race, callback) {
 
     async.each(races, getRaceData, function(err) {
         if (err)
-            console.log("Error getting race history data =>" + err);
+            log.info("Error getting race history data =>%s", err);
     });
 
 })();
