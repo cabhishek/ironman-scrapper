@@ -60,7 +60,7 @@ function createRacePages(race, callback) {
     //Get all race history.
     var races = raceHistory(raceName);
 
-    // Get search for races by year
+    // search for a races by year
     var year = process.argv[3];
 
     log.info("Year =>%s", year);

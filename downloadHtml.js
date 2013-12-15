@@ -7,7 +7,9 @@ var raceHistory = require('./races/raceHistory'),
     mkdirp = require('mkdirp'),
     async = require('async'),
     path = require('path'),
-    fs = require('fs');
+    fs = require('fs'),
+    Log = require('log'),
+    log = new Log('info');
 
 function downloadData(racePage, callback) {
 
@@ -37,10 +39,10 @@ function getRaceData(race, callback) {
     //Create paginated pages of race data
     var pages = helper.createPages(race);
 
-    console.log("Created folderName =>" + folderName);
-    console.log("Race name =>" + race.name);
-    console.log("Race year =>" + race.year);
-    console.log("Total pages =>" + race.pages);
+    log.info("Created folderName =>%s", folderName);
+    log.info("Race name =>%s", race.name);
+    log.info("Race year =>%s", race.year);
+    log.info("Total pages =>%s", race.pages);
 
     racePages = [];
 
@@ -65,6 +67,16 @@ function getRaceData(race, callback) {
 
     //Get all race history.
     var races = raceHistory(raceName);
+
+    // Search for a races by year
+    var year = process.argv[3];
+
+    log.info("Year =>%s", year);
+
+    if (year)
+        races = _.where(races, {
+            year: parseInt(year, 0)
+        });
 
     async.each(races, getRaceData, function(err) {
         if (err)
