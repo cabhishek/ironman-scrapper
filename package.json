@@ -1,0 +1,27 @@
+{
+  "name": "datathletics",
+  "version": "0.0.1",
+  "description": "Race predictions based on data",
+  "main": "downloadHtml.js",
+  "dependencies": {
+    "async": "~0.2.9",
+    "cheerio": "~0.12.3",
+    "client-http": "~0.0.5",
+    "mkdirp": "~0.3.5",
+    "underscore": "~1.5.2",
+    "underscore.string": "~2.3.3",
+    "node.io": "~0.5.1",
+    "request": "~2.27.0",
+    "log":"*"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@bitbucket.org:cabhishek/datathletics.git"
+  },
+  "author": "Abhishek Kapatkar",
+  "license": "BSD-2-Clause"
+}

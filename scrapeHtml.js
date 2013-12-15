@@ -7,29 +7,72 @@ var helper = require('./helper'),
     _ = require('underscore'),
     async = require('async'),
     mkdirp = require('mkdirp'),
-    fs = require('fs');
+    fs = require('fs'),
+    Log = require('log'),
+    log = new Log('info');
 
 
-var raceName = "Ironman Florida";
+function readDataFile(racePage, callback) {
 
-var history = raceHistory(raceName);
+    var fileName = helper.getFileName(racePage);
+    log.info("Reading file =>%s", fileName);
 
-history.forEach(function(race) {
+    fs.readFile(racePage.folderName + '/' + fileName, function(err, raw_html) {
 
-    var foldername = helper.getFolderName(race);
-    var filename = helper.getFileName(race);
+        var data = scrapeData(raw_html, racePage.scraperName);
 
-    fs.readFile(foldername + '/' + filename, function(err, raw_html) {
-        var data = scrapeData(raw_html, race.scrappername);
+        callback(null, data);
+    });
+}
 
-        mkdirp(foldername + '/data', function(err) {
+function createRacePages(race, callback) {
 
-            var dataFile = _s.underscored(_s.sprintf('%s/data/%s_%s.csv', foldername, race.name, race.year));
+    var folderName = helper.getFolderName(race);
 
-            writeCsv(dataFile, data);
+    //Create paginated pages of race data
+    var pages = helper.createPages(race);
 
-            console.log('Done saving ->' + dataFile);
+    racePages = [];
+
+    pages.forEach(function(page) {
+        racePages.push(_.clone(_.extend(race, {
+            'page': page,
+            'folderName': folderName
+        })));
+    });
+
+    async.concat(racePages, readDataFile, function(err, results) {
+
+        mkdirp(folderName + '/data', function(err) {
+            var dataFile = _s.underscored(_s.sprintf('%s/data/%s_%s.csv', folderName, race.name, race.year));
+            writeCsv(dataFile, results);
+
+            log.info('Done saving ->%s', dataFile);
         });
 
     });
-});
+}
+
+(function main() {
+
+    var raceName = process.argv[2] || "Ironman Florida";
+    log.info("RaceName =>%s", raceName);
+    //Get all race history.
+    var races = raceHistory(raceName);
+
+    // Get search for races by year
+    var year = process.argv[3];
+
+    log.info("Year =>%s", year);
+
+    if (year)
+        races = _.where(races, {
+            year: parseInt(year, 0)
+        });
+
+    async.each(races, createRacePages, function(err) {
+        if (err)
+            log.info("Error getting race history data =>%s", err);
+    });
+
+})();

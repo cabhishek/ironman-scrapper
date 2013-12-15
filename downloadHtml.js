@@ -9,8 +9,6 @@ var raceHistory = require('./races/raceHistory'),
     path = require('path'),
     fs = require('fs');
 
-var raceName = "Ironman Florida";
-
 function downloadData(racePage, callback) {
 
     var url = get_url(racePage);
@@ -36,9 +34,13 @@ function getRaceData(race, callback) {
     //Create folder to save all data
     mkdirp(folderName, function(err) {});
 
-    pages = _.range(1, race.pages + 1);
+    //Create paginated pages of race data
+    var pages = helper.createPages(race);
 
     console.log("Created folderName =>" + folderName);
+    console.log("Race name =>" + race.name);
+    console.log("Race year =>" + race.year);
+    console.log("Total pages =>" + race.pages);
 
     racePages = [];
 
@@ -51,7 +53,7 @@ function getRaceData(race, callback) {
 
 
     async.each(racePages, downloadData, function(err) {
-        if (err !== null)
+        if (err)
             console.log("Error downloading race page data =>" + err);
         console.log("Done downloading all race pages");
     });
@@ -59,11 +61,13 @@ function getRaceData(race, callback) {
 
 (function main() {
 
+    var raceName = process.argv[2] || "Ironman Florida";
+
     //Get all race history.
     var races = raceHistory(raceName);
 
     async.each(races, getRaceData, function(err) {
-        if (err !== null)
+        if (err)
             console.log("Error getting race history data =>" + err);
     });
 

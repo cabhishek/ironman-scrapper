@@ -2,13 +2,15 @@ var scrape_with_time = require('./scrape_with_time'),
     scrape_without_time = require('./scrape_without_time'),
     scrape_new_site = require('./scrape_new_site'),
     fs = require('fs'),
-    _ = require('underscore');
+    _ = require('underscore'),
+    Log = require('log'),
+    log = new Log('info');
 
 module.exports = function scrapeData(rawHtml, scraperName) {
 
     scraperName = typeof scraperName !== 'undefined' ? scraperName : "with_time" ;
 
-    console.log('Scrapper Name ->' + scraperName);
+    log.info('Scrapper Name ->%s', scraperName);
 
     var scrapers ={};
 

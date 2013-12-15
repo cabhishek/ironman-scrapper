@@ -11,7 +11,6 @@ module.exports = function get_url(race) {
 
 
     console.log('Getting data from ->' + athlinks_url);
-    console.log('Page number ->' + race.page);
 
     return athlinks_url;
 };

@@ -1,4 +1,5 @@
-var _s = require('underscore.string');
+var _ = require('underscore'),
+    _s = require('underscore.string');
 
 function getFolderName(race){
     var foldername  = _s.underscored(_s.sprintf('%s/%s', race.name, race.year));
@@ -12,5 +13,10 @@ function getFileName(race){
     return fileName;
 }
 
+function createPages(race){
+    return _.range(1, race.pages + 1);
+}
+
 exports.getFolderName = getFolderName;
 exports.getFileName = getFileName;
+exports.createPages = createPages;
