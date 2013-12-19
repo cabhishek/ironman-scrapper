@@ -1,20 +1,10 @@
-var Bookshelf = require('bookshelf'),
+var Bookshelf = require('./dbInitialize')(),
     helper = require('../helper'),
     raceHistory = require('../races/raceHistory'),
     _ = require('underscore'),
     Log = require('log'),
     log = new Log('info'),
     async = require('async');
-
-Bookshelf = Bookshelf.initialize({
-    client: 'mysql',
-    connection: {
-        host: '127.0.0.1',
-        user: 'root',
-        database: 'datathletics',
-        charset: 'utf8'
-    }
-});
 
 function persistRaceData(race, callback) {
     var Race = Bookshelf.Model.extend({
@@ -26,6 +16,7 @@ function persistRaceData(race, callback) {
     Race.forge({
         name: race.name,
         year: race.year,
+        type: race.type,
         athlinks_event_id: race.eventid,
         athlinks_course_id: race.courseid
 
