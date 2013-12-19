@@ -12,7 +12,9 @@
     "underscore.string": "~2.3.3",
     "node.io": "~0.5.1",
     "request": "~2.27.0",
-    "log":"*"
+    "log": "*",
+    "bookshelf": "~0.6.1",
+    "mysql": "~2.0.0-rc2"
   },
   "devDependencies": {},
   "scripts": {
