@@ -1,22 +1,28 @@
-var scrape_with_time = require('./scrape_with_time'),
-    scrape_without_time = require('./scrape_without_time'),
-    scrape_new_site = require('./scrape_new_site'),
+var withTransitionTime = require('./withTransitionTime'),
+    withoutTransitionTime = require('./withoutTransitionTime'),
+    newSite = require('./newSite'),
     _ = require('underscore'),
     Log = require('log'),
     log = new Log('info'),
     fs = require('fs');
 
-module.exports = function scrapeData(rawHtml, scraperName) {
+module.exports = function scrape(rawHtml, scraperName) {
 
-    scraperName = typeof scraperName !== 'undefined' ? scraperName : "with_time" ;
+    scraperName = (typeof scraperName !== 'undefined') ? scraperName : "with_time";
 
-    var scrapers ={};
+    var scrapers = {};
 
     //Append all different types of scrapers.
     //format -> {scraperName: scraper}
-    _.extend(scrapers, {"with_time": scrape_with_time});
-    _.extend(scrapers, {"without_time": scrape_without_time});
-    _.extend(scrapers, {"new_site": scrape_new_site});
+    _.extend(scrapers, {
+        "with_time": withTransitionTime
+    });
+    _.extend(scrapers, {
+        "without_time": withoutTransitionTime
+    });
+    _.extend(scrapers, {
+        "new_site": newSite
+    });
 
     return scrapers[scraperName](rawHtml);
 };
