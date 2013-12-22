@@ -14,7 +14,7 @@ var florida = {
             name: "Ironman Florida",
             eventid: 145849,
             courseid: 199348,
-            pages: 24,
+            pages: 2,
             year: 2011,
             type: 0
         }
