@@ -23,13 +23,13 @@ var db = require('./initialize')(),
             year: parseInt(year, 0)
         });
 
-    async.each(races, persistRaceData, function(err) {
+    async.each(races, persist, function(err) {
         if (err) throw err;
     });
 
 })();
 
-function persistRaceData(race, callback) {
+function persist(race, callback) {
 
     Race.forge({
         name: race.name,

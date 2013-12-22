@@ -27,7 +27,7 @@ module.exports = function scrape(rawHtml) {
         var athlete_ids = _s.trim((row.find('a').attr('href')), "http://athlinks.com/result/").split("/");
         var athlinksId = athlete_ids[athlete_ids.length - 2];
 
-        var names = athlete_row.text().split(' ');
+        var names = _s.capitalize(_s.humanize(athlete_row.text())).split(' ');
 
         var firstName = _.first(names);
         var lastName = _.rest(names, 1).join(' ');
