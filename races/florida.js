@@ -4,7 +4,7 @@ var florida = {
         name: "Ironman Florida",
         eventId: 231400,
         courseId: 334578,
-        pages: 2,
+        pages: 25,
         year: 2012,
         type: 0,
         scraperName: 'without_time'
@@ -12,10 +12,10 @@ var florida = {
         name: "Ironman Florida",
         eventId: 145849,
         courseId: 199348,
-        pages: 2,
+        pages: 24,
         year: 2011,
         type: 0
-    }/*, {
+    }, {
         name: "Ironman Florida",
         eventId: 107294,
         courseId: 146681,
@@ -85,7 +85,7 @@ var florida = {
         pages: 18,
         year: 2001,
         type: 0
-    }*/]
+    }]
 };
 
 exports.floridaHistory = florida;

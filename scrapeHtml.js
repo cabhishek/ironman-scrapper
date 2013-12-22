@@ -1,4 +1,4 @@
-var db = require('./db/dbInitialize')(),
+var db = require('./db/initialize')(),
     persistAthleteRace = require('./db/persistAthleteRace'),
     raceHistory = require('./races/raceHistory'),
     scrape = require('./scraper/scrape'),

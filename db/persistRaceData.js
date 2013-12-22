@@ -1,4 +1,4 @@
-var db = require('./dbInitialize')(),
+var db = require('./initialize')(),
     Race = require('../models/race'),
     raceHistory = require('../races/raceHistory'),
     helper = require('../helper'),
@@ -6,20 +6,6 @@ var db = require('./dbInitialize')(),
     Log = require('log'),
     log = new Log('info'),
     async = require('async');
-
-function persistRaceData(race) {
-
-    Race.forge({
-        name: race.name,
-        year: race.year,
-        type: race.type,
-        athlinks_event_id: race.eventId,
-        athlinks_course_id: race.courseId
-
-    }).save().then(function() {
-        log.info('Race =>%s year=>%s saved !!', race.name, race.year);
-    });
-}
 
 (function main() {
 
@@ -38,8 +24,22 @@ function persistRaceData(race) {
         });
 
     async.each(races, persistRaceData, function(err) {
-        if (err)
-            log.info("Error getting race history data =>%s", err);
+        if (err) throw err;
     });
 
 })();
+
+function persistRaceData(race, callback) {
+
+    Race.forge({
+        name: race.name,
+        year: race.year,
+        type: race.type,
+        athlinks_event_id: race.eventId,
+        athlinks_course_id: race.courseId
+
+    }).save().then(function() {
+        log.info('Race =>%s year=>%s saved !!', race.name, race.year);
+        callback();
+    });
+}
