@@ -1,6 +1,6 @@
 var cheerio = require('cheerio'),
-    _ = require('underscore'),
     _s = require('underscore.string'),
+    _ = require('underscore'),
     util = require('util'),
     fs = require('fs');
 
@@ -30,29 +30,29 @@ module.exports = function scrapeData(data) {
         var names = athlete_row.text().split(' ');
 
         var firstName = _.first(names);
-        var lastName = _.rest(names, 1).join(" ");
+        var lastName = _.rest(names, 1).join(' ');
 
         var m_f = row.find(':nth-child(6)').text();
         var age = row.find(':nth-child(7)').text();
         var bib = row.find(':nth-child(8)').text();
 
-        var swim_time = row.find(':nth-child(9)').text();
-        var swim_pace = row.find(':nth-child(10)').text();
-        var swim_ago = row.find(':nth-child(11)').text();
+        var swimTime = row.find(':nth-child(9)').text();
+        var swimPace = row.find(':nth-child(10)').text();
+        var swimAgo = row.find(':nth-child(11)').text();
 
         var t1 = row.find(':nth-child(12)').text();
 
-        var cycle_time = row.find(':nth-child(13)').text();
-        var cycle_speed = row.find(':nth-child(14)').text();
-        var cycle_ago = row.find(':nth-child(15)').text();
+        var cycleTime = row.find(':nth-child(13)').text();
+        var cycleSpeed = row.find(':nth-child(14)').text();
+        var cycleAgo = row.find(':nth-child(15)').text();
 
         var t2 = row.find(':nth-child(16)').text();
 
-        var run_time = row.find(':nth-child(17)').text();
-        var run_pace = row.find(':nth-child(18)').text();
-        var run_ago = row.find(':nth-child(19)').text();
+        var runTime = row.find(':nth-child(17)').text();
+        var runPace = row.find(':nth-child(18)').text();
+        var runAgo = row.find(':nth-child(19)').text();
 
-        var final_time = row.find(':nth-child(20)').text();
+        var finalTime = row.find(':nth-child(20)').text();
 
         rows.push({
             "claimed": claimed,
@@ -63,18 +63,18 @@ module.exports = function scrapeData(data) {
             "m_f": m_f,
             "age": age,
             "bib": bib,
-            "swimTime": swim_time,
-            "swimPace": swim_pace,
-            "swimAgo": _cleanupAgo(swim_ago),
+            "swimTime": swimTime,
+            "swimPace": swimPace,
+            "swimAgo": _cleanupAgo(swimAgo),
             "t1": t1,
-            "cycleTime": cycle_time,
-            "cycleSpeed": cycle_speed,
-            "cycleAgo": _cleanupAgo(cycle_ago),
+            "cycleTime": cycleTime,
+            "cycleSpeed": cycleSpeed,
+            "cycleAgo": _cleanupAgo(cycleAgo),
             "t2": t2,
-            "runTime": run_time,
-            "runPace": run_pace,
-            "runAgo": _cleanupAgo(run_ago),
-            "finalTime": final_time
+            "runTime": runTime,
+            "runPace": runPace,
+            "runAgo": _cleanupAgo(runAgo),
+            "finalTime": finalTime
         });
     });
 

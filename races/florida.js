@@ -1,21 +1,22 @@
 var florida = {
 
     "Ironman Florida": [{
-        name: "Ironman Florida",
-        eventid: 231400,
-        courseid: 334578,
-        pages: 24,
-        year: 2012,
-        type: 0,
-        scraperName: 'without_time'
-    }, {
-        name: "Ironman Florida",
-        eventid: 145849,
-        courseid: 199348,
-        pages: 2,
-        year: 2011,
-        type: 0
-    }, {
+            name: "Ironman Florida",
+            eventid: 231400,
+            courseid: 334578,
+            pages: 2,
+            year: 2012,
+            type: 0,
+            scraperName: 'without_time'
+        }, {
+            name: "Ironman Florida",
+            eventid: 145849,
+            courseid: 199348,
+            pages: 2,
+            year: 2011,
+            type: 0
+        }
+        /*, {
         name: "Ironman Florida",
         eventid: 107294,
         courseid: 146681,
@@ -85,7 +86,8 @@ var florida = {
         pages: 18,
         year: 2001,
         type: 0
-    }]
+    }*/
+    ]
 };
 
 exports.floridaHistory = florida;

@@ -1,8 +1,8 @@
-var helper = require('./helper'),
-    db = require('./db/dbInitialize')(),
+var db = require('./db/dbInitialize')(),
+    persistAthleteRace = require('./db/persistAthleteRace'),
     raceHistory = require('./races/raceHistory'),
     scrape = require('./scraper/scrape'),
-    persistAthleteRace = require('./db/persistAthleteRace'),
+    helper = require('./helper'),
     _s = require('underscore.string'),
     _ = require('underscore'),
     async = require('async'),
@@ -51,25 +51,25 @@ function createRacePages(race, callback) {
         })));
     });
 
-    async.concat(racePages, scrapePages, function(err, results) {
-        persistRaceData(race, results);
+    async.concat(racePages, scrapePage, function(err, results) {
+        //Once all scraping is done persist all of it in DB.
+        persist(race, results);
     });
 }
 
-function persistRaceData(race, athleteRaces) {
+function persist(race, results) {
 
     // Combine race + athelete race data
-    _.each(athleteRaces, function(athleteRace) {
+    _.each(results, function(athleteRace) {
         _.extend(athleteRace, race);
     });
 
-    async.each(athleteRaces, persistAthleteRace, function(err) {
+    async.each(results, persistAthleteRace, function(err) {
         if (err) throw err;
     });
 }
 
-
-function scrapePages(racePage, callback) {
+function scrapePage(racePage, callback) {
 
     var fileName = helper.getFileName(racePage);
     log.info("Reading file =>%s", fileName);
