@@ -13,8 +13,8 @@ function persistRaceData(race) {
         name: race.name,
         year: race.year,
         type: race.type,
-        athlinks_event_id: race.eventid,
-        athlinks_course_id: race.courseid
+        athlinks_event_id: race.eventId,
+        athlinks_course_id: race.courseId
 
     }).save().then(function() {
         log.info('Race =>%s year=>%s saved !!', race.name, race.year);

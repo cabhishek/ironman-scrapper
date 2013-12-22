@@ -31,8 +31,8 @@ function createAthleteRaceData(athlete, raceData) {
 
     var race = new Race({
         name: raceData.name,
-        athlinks_event_id: raceData.eventid,
-        athlinks_course_id: raceData.courseid
+        athlinks_event_id: raceData.eventId,
+        athlinks_course_id: raceData.courseId
     });
 
     race.on('fetched', function(race) {

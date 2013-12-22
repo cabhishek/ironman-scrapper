@@ -1,58 +1,58 @@
 var arizona = {
     "Ironman Arizona": [{
         name: "Ironman Arizona",
-        eventid: 225521,
-        courseid: 338403,
+        eventId: 225521,
+        courseId: 338403,
         pages: 24,
         type:0,
         year: 2012,
         scraperName: 'without_time'
     }, {
         name: "Ironman Arizona",
-        eventid: 147678,
-        courseid: 236724,
+        eventId: 147678,
+        courseId: 236724,
         pages: 25,
         type:0,
         year: 2011
     }, {
         name: "Ironman Arizona",
-        eventid: 109719,
-        courseid: 208173,
+        eventId: 109719,
+        courseId: 208173,
         pages: 23,
         type:0,
         year: 2010
     }, {
         name: "Ironman Arizona",
-        eventid: 128700,
-        courseid: 169526,
+        eventId: 128700,
+        courseId: 169526,
         pages: 24,
         type:0,
         year: 2009
     }, {
         name: "Ironman Arizona",
-        eventid: 45650,
-        courseid: 67622,
+        eventId: 45650,
+        courseId: 67622,
         pages: 17,
         type:0,
         year: 2008
     }, {
         name: "Ironman Arizona",
-        eventid: 21439,
-        courseid: 31215,
+        eventId: 21439,
+        courseId: 31215,
         pages: 19,
         type:0,
         year: 2007
     }, {
         name: "Ironman Arizona",
-        eventid: 8511,
-        courseid: 11415,
+        eventId: 8511,
+        courseId: 11415,
         pages: 18,
         type:0,
         year: 2006
     }, {
         name: "Ironman Arizona",
-        eventid: 4298,
-        courseid: 5519,
+        eventId: 4298,
+        courseId: 5519,
         pages: 17,
         type:0,
         year: 2005
