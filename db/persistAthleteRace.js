@@ -17,10 +17,10 @@ module.exports = function persistAthleteRace(raceData) {
     });
 
     athlete.fetch()
-        .then(function(model) {
+        .then(function(athlete) {
 
-            if (model) {
-                createAthleteRaceData(model, raceData);
+            if (athlete) {
+                createAthleteRaceData(athlete, raceData);
             } else {
                 createAthlete(raceData);
             }

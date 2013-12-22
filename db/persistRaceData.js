@@ -1,4 +1,5 @@
-var Bookshelf = require('./dbInitialize')(),
+var db = require('./dbInitialize')(),
+    Race = require('../models/race'),
     raceHistory = require('../races/raceHistory'),
     helper = require('../helper'),
     _ = require('underscore'),
@@ -6,12 +7,7 @@ var Bookshelf = require('./dbInitialize')(),
     log = new Log('info'),
     async = require('async');
 
-function persistRaceData(race, callback) {
-    var Race = Bookshelf.Model.extend({
-        tableName: 'races',
-        hasTimestamps: ['created', 'modified']
-
-    });
+function persistRaceData(race) {
 
     Race.forge({
         name: race.name,
@@ -22,7 +18,6 @@ function persistRaceData(race, callback) {
 
     }).save().then(function() {
         log.info('Race =>%s year=>%s saved !!', race.name, race.year);
-        callback();
     });
 }
 
