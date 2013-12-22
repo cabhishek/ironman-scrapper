@@ -1,6 +1,6 @@
 var Bookshelf = require('./dbInitialize')(),
-    helper = require('../helper'),
     raceHistory = require('../races/raceHistory'),
+    helper = require('../helper'),
     _ = require('underscore'),
     Log = require('log'),
     log = new Log('info'),

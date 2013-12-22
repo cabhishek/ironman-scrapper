@@ -25,15 +25,28 @@ CREATE TABLE `races` (
   KEY `races_fbfc09f1` (`athlinks_event_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1798030304 DEFAULT CHARSET=latin1;
 
-/* CREATE TABLE `audit_logs_auditlog` (
+CREATE TABLE `athlete_races` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `created` datetime NOT NULL,
-  `modified` datetime NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `ip_address` char(15) DEFAULT NULL,
-  `type` int(11) DEFAULT NULL,
-  `text` longtext,
+  `race_id` int(11) NOT NULL,
+  `athlete_id` int(11) NOT NULL,
+  `m_f` varchar(10) NULL,
+  `age` int(3) NULL,
+  `bib` int(11) NULL, 
+  `swim_time` datetime NULL,
+  `swim_pace` datetime NULL,
+  `swim_ago` datetime  NULL,
+  `t1` datetime NULL,
+  `cycle_time` datetime NULL,
+  `cycle_pace` datetime NULL,
+  `cycle_ago` datetime NULL,
+  `t2` datetime NULL,
+  `race_time` datetime NULL,
+  `race_pace` datetime NULL,
+  `race_ago` datetime NULL,
+  `final_time` datetime NULL,
+  `created` datetime NULL,
+  `modified` datetime NULL,
   PRIMARY KEY (`id`),
-  KEY `audit_logs_auditlog_fbfc09f1` (`user_id`),
-  CONSTRAINT `user_id_refs_id_91d5196a` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=352 DEFAULT CHARSET=latin1; */
+  CONSTRAINT `race_id_refs_id_91d5196a` FOREIGN KEY (`race_id`) REFERENCES `races` (`id`),
+  CONSTRAINT `athlete_id_refs_id_91d5196a` FOREIGN KEY (`athlete_id`) REFERENCES `athletes` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1798030304 DEFAULT CHARSET=latin1;

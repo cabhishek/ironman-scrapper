@@ -10,8 +10,6 @@ module.exports = function scrapeData(rawHtml, scraperName) {
 
     scraperName = typeof scraperName !== 'undefined' ? scraperName : "with_time" ;
 
-    log.info('Scrapper Name ->%s', scraperName);
-
     var scrapers ={};
 
     //Append all different types of scrapers.

@@ -1,29 +1,42 @@
 var helper = require('./helper'),
     raceHistory = require('./races/raceHistory'),
-    scrapeData = require('./scrapper/scrape'),
-    writeCsv = require('./writeCsv'),
-    http = require('client-http'),
+    scrape = require('./scrapper/scrape'),
+    persistAthletesRaceData = require('./db/persistAthletesRaceData'),
     _s = require('underscore.string'),
     _ = require('underscore'),
+    util = require('util'),
     async = require('async'),
-    mkdirp = require('mkdirp'),
     fs = require('fs'),
     Log = require('log'),
     log = new Log('info');
 
+(function main() {
 
-function readDataFile(racePage, callback) {
+    var raceName = process.argv[2] || "Ironman Florida";
+    log.info("RaceName =>%s", raceName);
 
-    var fileName = helper.getFileName(racePage);
-    log.info("Reading file =>%s", fileName);
+    // All race history.
+    var races = raceHistory(raceName);
 
-    fs.readFile(racePage.folderName + '/' + fileName, function(err, raw_html) {
+    // Search for a races by year
+    var year = process.argv[3];
 
-        var data = scrapeData(raw_html, racePage.scraperName);
+    if (year)
+        races = _.where(races, {
+            year: parseInt(year, 0)
+        });
 
-        callback(null, data);
+    async.each(races, createRacePages, function(err) {
+        if (err) {
+            log.info("Error getting race history data =>%s", err);
+        } else {
+
+            log.info("Scraping and persisting data finished");
+        }
+
     });
-}
+
+})();
 
 function createRacePages(race, callback) {
 
@@ -34,45 +47,45 @@ function createRacePages(race, callback) {
 
     racePages = [];
 
-    pages.forEach(function(page) {
+    _.each(pages, function(page) {
         racePages.push(_.clone(_.extend(race, {
             'page': page,
             'folderName': folderName
         })));
     });
 
-    async.concat(racePages, readDataFile, function(err, results) {
-
-        mkdirp(folderName + '/data', function(err) {
-            var dataFile = _s.underscored(_s.sprintf('%s/data/%s_%s.csv', folderName, race.name, race.year));
-            writeCsv(dataFile, results);
-
-            log.info('Done saving ->%s', dataFile);
-        });
-
+    async.concat(racePages, scrapePages, function(err, results) {
+        persistRaceData(race, results);
     });
 }
 
-(function main() {
+function persistRaceData(race, results) {
 
-    var raceName = process.argv[2] || "Ironman Florida";
-    log.info("RaceName =>%s", raceName);
-    //Get all race history.
-    var races = raceHistory(raceName);
-
-    // search for a races by year
-    var year = process.argv[3];
-
-    log.info("Year =>%s", year);
-
-    if (year)
-        races = _.where(races, {
-            year: parseInt(year, 0)
-        });
-
-    async.each(races, createRacePages, function(err) {
-        if (err)
-            log.info("Error getting race history data =>%s", err);
+    _.each(results, function(result) {
+        _.extend(result, race);
     });
 
-})();
+    async.each(results, persistAthletesRaceData, function(err) {
+
+    });
+    // _.each(results, function(result) {
+    //     console.log(result);
+    // });
+
+    // log.info("Total records =>%s", results.length);
+    // log.info('Done saving %s %s', race.name, race.year);
+}
+
+
+function scrapePages(racePage, callback) {
+
+    var fileName = helper.getFileName(racePage);
+    log.info("Reading file =>%s", fileName);
+
+    fs.readFile(racePage.folderName + '/' + fileName, function(err, rawHtml) {
+
+        var data = scrape(rawHtml, racePage.scraperName);
+
+        callback(null, data);
+    });
+}
