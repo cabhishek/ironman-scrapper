@@ -1,4 +1,6 @@
-var Bookshelf = require('./dbInitialize')(),
+var Athlete = require('../models/athlete'),
+    Race = require('../models/race'),
+    AthleteRace = require('../models/athleteRace'),
     _s = require('underscore.string'),
     _ = require('underscore'),
     async = require('async'),
@@ -6,11 +8,7 @@ var Bookshelf = require('./dbInitialize')(),
     log = new Log('info');
 
 
-module.exports = function persistAthletesRaceData(raceData) {
-
-    var Athlete = Bookshelf.Model.extend({
-        tableName: 'athletes'
-    });
+module.exports = function persistAthleteRace(raceData) {
 
     new Athlete({
         'athlinks_id': raceData.athlinksId,
@@ -29,15 +27,6 @@ module.exports = function persistAthletesRaceData(raceData) {
 };
 
 function createAthleteRaceData(athlete, raceData) {
-    var AthleteRace = Bookshelf.Model.extend({
-        tableName: 'athlete_races',
-
-        hasTimestamps: ['created', 'modified']
-    });
-
-    var Race = Bookshelf.Model.extend({
-        tableName: 'races'
-    });
 
     new Race({
         name: raceData.name,
@@ -46,7 +35,7 @@ function createAthleteRaceData(athlete, raceData) {
     }).fetch()
         .then(function(race) {
 
-            if(_.isUndefined(race) || _.isNull(race))
+            if (_.isUndefined(race) || _.isNull(race))
                 throw "Failed to get race data";
 
             AthleteRace.forge({
@@ -78,18 +67,13 @@ function createAthleteRaceData(athlete, raceData) {
                 final_time: raceData.finalTime
 
             }).save().then(function() {
-                console.log("Athlete race data saved for %s", athlete.get('id'));
+                log.info("Athlete race data saved for %s %s", athlete.get('first_name'), athlete.get('last_name'));
             });
 
         });
 }
 
 function createAthlete(raceData) {
-
-    var Athlete = Bookshelf.Model.extend({
-        tableName: 'athletes',
-        hasTimestamps: ['created', 'modified']
-    });
 
     Athlete.forge({
         first_name: raceData.firstName,

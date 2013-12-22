@@ -1,11 +1,12 @@
 var helper = require('./helper'),
+    db = require('./db/dbInitialize')(),
     raceHistory = require('./races/raceHistory'),
     scrape = require('./scrapper/scrape'),
-    persistAthletesRaceData = require('./db/persistAthletesRaceData'),
+    persistAthleteRace = require('./db/persistAthleteRace'),
     _s = require('underscore.string'),
     _ = require('underscore'),
-    util = require('util'),
     async = require('async'),
+    util = require('util'),
     fs = require('fs'),
     Log = require('log'),
     log = new Log('info');
@@ -27,13 +28,9 @@ var helper = require('./helper'),
         });
 
     async.each(races, createRacePages, function(err) {
-        if (err) {
-            log.info("Error getting race history data =>%s", err);
-        } else {
+        if (err) throw err;
 
-            log.info("Scraping and persisting data finished");
-        }
-
+        log.info("Scraping and persisting data finished");
     });
 
 })();
@@ -59,21 +56,16 @@ function createRacePages(race, callback) {
     });
 }
 
-function persistRaceData(race, results) {
+function persistRaceData(race, athleteRaces) {
 
-    _.each(results, function(result) {
-        _.extend(result, race);
+    // Combine race + athelete race data
+    _.each(athleteRaces, function(athleteRace) {
+        _.extend(athleteRace, race);
     });
 
-    async.each(results, persistAthletesRaceData, function(err) {
-
+    async.each(athleteRaces, persistAthleteRace, function(err) {
+        if (err) throw err;
     });
-    // _.each(results, function(result) {
-    //     console.log(result);
-    // });
-
-    // log.info("Total records =>%s", results.length);
-    // log.info('Done saving %s %s', race.name, race.year);
 }
 
 
