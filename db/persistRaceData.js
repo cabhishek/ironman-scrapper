@@ -15,13 +15,11 @@ var db = require('./initialize')(),
     //Get all race history.
     var races = raceHistory(raceName);
 
-    // search for a races by year
-    var year = process.argv[3];
+    // Space sperated list "2009 2010"
+    var years = process.argv[3];
 
-    if (year)
-        races = _.where(races, {
-            year: parseInt(year, 0)
-        });
+    if (years)
+        races = helper.filterByYear(races, years);
 
     async.each(races, persist, function(err) {
         if (err) throw err;

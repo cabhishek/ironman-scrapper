@@ -20,6 +20,19 @@ function createPages(race) {
     return _.range(1, race.pages + 1);
 }
 
+function filterByYear(races, years) {
+    var temp = [];
+
+    _.each(years.split(' '), function(year) {
+        temp.push(_.where(races, {
+            year: parseInt(year, 0)
+        }));
+    });
+
+    return _.flatten(temp);
+}
+
 exports.getFolderName = getFolderName;
 exports.getFileName = getFileName;
 exports.createPages = createPages;
+exports.filterByYear = filterByYear;
