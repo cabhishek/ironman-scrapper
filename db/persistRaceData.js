@@ -38,6 +38,7 @@ function persist(race, callback) {
 
     }).save().then(function() {
         log.info('Race =>%s year=>%s saved !!', race.name, race.year);
+
         callback();
     });
 }

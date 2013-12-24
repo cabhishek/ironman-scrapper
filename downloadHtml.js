@@ -11,7 +11,27 @@ var raceHistory = require('./races/raceHistory'),
     Log = require('log'),
     log = new Log('info');
 
-function downloadData(racePage, callback) {
+(function main() {
+
+    var raceName = process.argv[2] || "Ironman Florida";
+
+    //Get all race history.
+    var races = raceHistory(raceName);
+
+    // Space sperated list "2009 2010"
+    var years = process.argv[3];
+
+    if (years)
+        races = helper.filterByYear(races, years);
+
+    async.each(races, getRaceData, function(err) {
+        if (err) throw err;
+
+    });
+
+})();
+
+function downloadRawHtml(racePage, callback) {
 
     var url = get_url(racePage);
     var fileName = helper.getFileName(racePage);
@@ -20,11 +40,10 @@ function downloadData(racePage, callback) {
 
         fs.writeFile(racePage.folderName + '/' + fileName, raw_html, function(err) {
 
-            if (err) {
-                log.info(err);
-            } else {
-                log.info("The %s was saved!", fileName);
-            }
+            if (err) throw err;
+
+            log.info("The %s was saved!", fileName);
+
         });
     });
 }
@@ -46,37 +65,16 @@ function getRaceData(race, callback) {
 
     racePages = [];
 
-    pages.forEach(function(page) {
+    _.each(pages, function(page) {
         racePages.push(_.clone(_.extend(race, {
             'page': page,
             'folderName': folderName
         })));
     });
 
+    async.each(racePages, downloadRawHtml, function(err) {
+        if (err) throw err;
 
-    async.each(racePages, downloadData, function(err) {
-        if (err)
-            console.log("Error downloading race page data =>" + err);
         console.log("Done downloading all race pages");
     });
 }
-
-(function main() {
-
-    var raceName = process.argv[2] || "Ironman Florida";
-
-    //Get all race history.
-    var races = raceHistory(raceName);
-
-    // Space sperated list "2009 2010"
-    var years = process.argv[3];
-
-    if (years)
-        races = helper.filterByYear(races, years);
-
-    async.each(races, getRaceData, function(err) {
-        if (err)
-            log.info("Error getting race history data =>%s", err);
-    });
-
-})();

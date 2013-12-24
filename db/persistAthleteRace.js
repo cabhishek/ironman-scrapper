@@ -27,6 +27,20 @@ module.exports = function persistAthleteRace(raceData) {
         });
 };
 
+function createAthlete(raceData) {
+
+    Athlete.forge({
+        first_name: raceData.firstName,
+        last_name: raceData.lastName,
+        athlinks_id: raceData.athlinksId,
+
+    }).save().then(function(athlete) {
+        log.info("Created athlete %s %s %s", raceData.athlinksId, raceData.firstName, raceData.lastName);
+
+        createAthleteRaceData(athlete, raceData);
+    });
+}
+
 function createAthleteRaceData(athlete, raceData) {
 
     var race = new Race({
@@ -75,18 +89,4 @@ function createAthleteRaceData(athlete, raceData) {
     });
 
     race.fetch();
-}
-
-function createAthlete(raceData) {
-
-    Athlete.forge({
-        first_name: raceData.firstName,
-        last_name: raceData.lastName,
-        athlinks_id: raceData.athlinksId,
-
-    }).save().then(function(athlete) {
-        log.info("Created athlete %s %s %s", raceData.athlinksId, raceData.firstName, raceData.lastName);
-
-        createAthleteRaceData(athlete, raceData);
-    });
 }
