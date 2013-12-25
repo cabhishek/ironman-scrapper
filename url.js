@@ -7,7 +7,7 @@ var util = require('util'),
 module.exports = function get_url(race) {
 
     var base_url = "http://storage.athlinks.com/time.aspx";
-    var params = util.format("?eventid=%s&courseid=%s&genderpage=A%s", race.eventid, race.courseid, race.page);
+    var params = util.format("?eventid=%s&courseid=%s&genderpage=A%s", race.eventId, race.courseId, race.page);
 
     var athlinks_url = base_url + params;
 
