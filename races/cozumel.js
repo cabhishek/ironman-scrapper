@@ -33,4 +33,4 @@ var cozumel = {
     }]
 };
 
-exports.cozumelHistory = cozumel;
+exports.cozumel = cozumel;

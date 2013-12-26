@@ -88,4 +88,4 @@ var newZealand = {
     }]
 };
 
-exports.newZealandHistory = newZealand;
+exports.newZealand = newZealand;

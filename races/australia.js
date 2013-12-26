@@ -84,4 +84,4 @@ var australia = {
     }]
 };
 
-exports.australiaHistory = australia;
+exports.australia = australia;

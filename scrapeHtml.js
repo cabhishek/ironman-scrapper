@@ -3,7 +3,6 @@ var db = require('./db/initialize')(),
     raceHistory = require('./races/raceHistory'),
     scrape = require('./scraper/scrape'),
     helper = require('./helper'),
-    _s = require('underscore.string'),
     _ = require('underscore'),
     async = require('async'),
     util = require('util'),
@@ -13,14 +12,12 @@ var db = require('./db/initialize')(),
 
 (function main() {
 
-    var raceName = process.argv[2] || "Ironman Florida";
+    var raceName = process.argv[2] || "Ironman Florida",
+        races = raceHistory(raceName),
+        //Comma sperated list "2009,2010"
+        years = process.argv[3];
+
     log.info("RaceName =>%s", raceName);
-
-    // All race history.
-    var races = raceHistory(raceName);
-
-    // Space sperated list "2009 2010"
-    var years = process.argv[3];
 
     if (years)
         races = helper.filterByYear(races, years);
@@ -35,12 +32,9 @@ var db = require('./db/initialize')(),
 
 function createRacePages(race, callback) {
 
-    var folderName = helper.getFolderName(race);
-
-    //Create paginated pages of race data
-    var pages = helper.createPages(race);
-
-    racePages = [];
+    var folderName = helper.getFolderName(race),
+        pages = helper.createPages(race),
+        racePages = [];
 
     _.each(pages, function(page) {
         racePages.push(_.clone(_.extend(race, {
@@ -50,8 +44,23 @@ function createRacePages(race, callback) {
     });
 
     async.concat(racePages, scrapePage, function(err, results) {
-        //Once all scraping is done persist all of it in DB.
+        //Once all scraping is done for a race year
+        //then go persist all of it in DB.
         persist(race, results);
+    });
+}
+
+function scrapePage(racePage, callback) {
+
+    var fileName = helper.getFileName(racePage);
+
+    log.info("Reading file =>%s", fileName);
+
+    fs.readFile(racePage.folderName + '/' + fileName, function(err, rawHtml) {
+
+        var data = scrape(rawHtml, racePage.scraperName);
+
+        callback(null, data);
     });
 }
 
@@ -64,18 +73,5 @@ function persist(race, results) {
 
     async.each(results, persistAthleteRace, function(err) {
         if (err) throw err;
-    });
-}
-
-function scrapePage(racePage, callback) {
-
-    var fileName = helper.getFileName(racePage);
-    log.info("Reading file =>%s", fileName);
-
-    fs.readFile(racePage.folderName + '/' + fileName, function(err, rawHtml) {
-
-        var data = scrape(rawHtml, racePage.scraperName);
-
-        callback(null, data);
     });
 }

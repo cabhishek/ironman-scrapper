@@ -56,4 +56,4 @@ var westernAustralia = {
     }]
 };
 
-exports.westernAustraliaHistory = westernAustralia;
+exports.westernAustralia = westernAustralia;

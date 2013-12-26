@@ -1,23 +1,25 @@
-var floridaHistory = require('./florida').floridaHistory,
-    arizonaHistory = require('./arizona').arizonaHistory,
-    cozumelHistory = require('./cozumel').cozumelHistory,
-    westernAustraliaHistory = require('./westernAustralia').westernAustraliaHistory,
-    newZealandHistory = require('./newZealand').newZealandHistory,
-    southAfricaHistory = require('./southAfrica').southAfricaHistory,
-    australiaHistory = require('./australia').australiaHistory,
+var florida = require('./florida').florida,
+    arizona = require('./arizona').arizona,
+    cozumel = require('./cozumel').cozumel,
+    westernAustralia = require('./westernAustralia').westernAustralia,
+    newZealand = require('./newZealand').newZealand,
+    southAfrica = require('./southAfrica').southAfrica,
+    australia = require('./australia').australia,
+    croix = require('./croix').croix,
     _ = require('underscore');
 
-module.exports = function raceHistory(raceName){
+module.exports = function race(raceName){
     var raceData = {};
 
     //Add data of a particular race
-    _.extend(raceData, floridaHistory);
-    _.extend(raceData, arizonaHistory);
-    _.extend(raceData, cozumelHistory);
-    _.extend(raceData, westernAustraliaHistory);
-    _.extend(raceData, newZealandHistory);
-    _.extend(raceData, southAfricaHistory);
-    _.extend(raceData, australiaHistory);
+    _.extend(raceData, florida);
+    _.extend(raceData, arizona);
+    _.extend(raceData, cozumel);
+    _.extend(raceData, westernAustralia);
+    _.extend(raceData, newZealand);
+    _.extend(raceData, southAfrica);
+    _.extend(raceData, australia);
+    _.extend(raceData, croix);
 
     return raceData[raceName];
 };

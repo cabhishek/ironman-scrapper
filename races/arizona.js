@@ -59,4 +59,4 @@ var arizona = {
     }]
 };
 
-exports.arizonaHistory = arizona;
+exports.arizona = arizona;

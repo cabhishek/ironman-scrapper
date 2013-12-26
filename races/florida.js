@@ -88,4 +88,4 @@ var florida = {
     }]
 };
 
-exports.floridaHistory = florida;
+exports.florida = florida;

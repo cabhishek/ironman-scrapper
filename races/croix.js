@@ -91,4 +91,4 @@ var croix = {
     }]
 };
 
-exports.croixHistory = croix;
+exports.croix = croix;

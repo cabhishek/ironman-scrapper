@@ -65,4 +65,4 @@ var southAfrica = {
     }]
 };
 
-exports.southAfricaHistory = southAfrica;
+exports.southAfrica = southAfrica;

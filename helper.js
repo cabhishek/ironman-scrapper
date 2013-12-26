@@ -1,17 +1,18 @@
 var _ = require('underscore'),
+    util = require('util'),
     _s = require('underscore.string');
 
 function getFolderName(race) {
 
     var dataFolder = "htmldata";
 
-    var foldername = _s.underscored(_s.sprintf('%s/%s/%s', dataFolder, race.name, race.year));
+    var foldername = _s.underscored(util.format('%s/%s/%s', dataFolder, race.name, race.year));
 
     return foldername;
 }
 
 function getFileName(race) {
-    var fileName = _s.underscored(_s.sprintf('%s_%s_page_%s.html', race.name, race.year, race.page));
+    var fileName = _s.underscored(util.format('%s_%s_page_%s.html', race.name, race.year, race.page));
 
     return fileName;
 }
@@ -23,7 +24,7 @@ function createPages(race) {
 function filterByYear(races, years) {
     var temp = [];
 
-    _.each(years.split(' '), function(year) {
+    _.each(years.split(','), function(year) {
         temp.push(_.where(races, {
             year: parseInt(year, 0)
         }));

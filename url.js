@@ -1,5 +1,4 @@
 var util = require('util'),
-    url = require("url"),
     Log = require('log'),
     log = new Log('info');
 
@@ -11,7 +10,7 @@ module.exports = function get_url(race) {
 
     var athlinks_url = base_url + params;
 
-    log.info('Getting data from ->%s', athlinks_url);
+    log.info('Getting data from =>%s', athlinks_url);
 
     return athlinks_url;
 };
