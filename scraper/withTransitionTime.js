@@ -15,7 +15,7 @@ module.exports = function scrape(rawHtml) {
         var row = $(this);
 
         // Structured as per rawHtml found @ http://storage.athlinks.com/time.aspx?eventid=115006&courseid=156044&genderpage=A14
-        var claimed = row.find("img").attr('src') === '/images/icoMemberSm.gif' ? 0 : 1;
+        var claimed = row.find("img").attr('src') === '/images/icoMemberSm.gif' ? 1 : 0;
 
         var a = row.find(':nth-child(2)').text();
         var g = row.find(':nth-child(3)').text();
@@ -81,6 +81,6 @@ module.exports = function scrape(rawHtml) {
     return rows;
 };
 
-function _cleanupAgo(value){
+function _cleanupAgo(value) {
     return value.split(" / ").join("/");
 }

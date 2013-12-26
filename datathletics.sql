@@ -17,6 +17,7 @@ CREATE TABLE `races` (
   `year` int(4) NOT NULL,
   `race_date` datetime NULL,
   `location` varchar(75) NULL,
+  `qualifier_id` int(11) NULL,
   `athlinks_event_id` int(11) NULL,
   `athlinks_course_id` int(11) NULL,
   `web_link` varchar(75) NULL,
@@ -52,4 +53,4 @@ CREATE TABLE `athlete_races` (
   PRIMARY KEY (`id`),
   CONSTRAINT `race_id_refs_id_91d5196a` FOREIGN KEY (`race_id`) REFERENCES `races` (`id`),
   CONSTRAINT `athlete_id_refs_id_91d5196a` FOREIGN KEY (`athlete_id`) REFERENCES `athletes` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3000 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2000 DEFAULT CHARSET=latin1;
