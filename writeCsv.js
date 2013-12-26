@@ -1,9 +1,9 @@
 var fs = require('fs');
 
-module.exports = function writeCsv (file_name, rows){
+module.exports = function writeCsv (fileName, rows){
     var keys = Object.keys(rows[0]);
 
-    var csv_data = [keys.join(',')];
+    var csvData = [keys.join(',')];
 
     rows.forEach(function (row) {
         var data = [];
@@ -12,10 +12,10 @@ module.exports = function writeCsv (file_name, rows){
             data.push(row[key]);
         });
 
-         csv_data.push(data.join(','));
+         csvData.push(data.join(','));
     });
 
-    csv_data = csv_data.join('\n');
+    csvData = csvData.join('\n');
 
-    fs.writeFile(file_name, csv_data);
+    fs.writeFile(fileName, csvData);
 };

@@ -1,12 +1,11 @@
 var _ = require('underscore'),
-    util = require('util'),
-    _s = require('underscore.string');
+    _s = require('underscore.string'),
+    util = require('util');
 
 function getFolderName(race) {
 
-    var dataFolder = "htmldata";
-
-    var foldername = _s.underscored(util.format('%s/%s/%s', dataFolder, race.name, race.year));
+    var dataFolder = "htmldata",
+        foldername = _s.underscored(util.format('%s/%s/%s', dataFolder, race.name, race.year));
 
     return foldername;
 }
