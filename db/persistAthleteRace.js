@@ -8,7 +8,7 @@ var AthleteRace = require('../models/athleteRace'),
     log = new Log('info');
 
 
-module.exports = function persistAthleteRace(raceData) {
+module.exports = function persistAthleteRace(raceData, callback) {
 
     var athlete = new Athlete({
         'athlinks_id': raceData.athlinksId,
@@ -20,14 +20,14 @@ module.exports = function persistAthleteRace(raceData) {
         .then(function(athlete) {
 
             if (athlete) {
-                createAthleteRaceData(athlete, raceData);
+                createAthleteRaceData(athlete, raceData, callback);
             } else {
-                createAthlete(raceData);
+                createAthlete(raceData, callback);
             }
         });
 };
 
-function createAthlete(raceData) {
+function createAthlete(raceData, callback) {
 
     Athlete.forge({
         first_name: raceData.firstName,
@@ -37,11 +37,11 @@ function createAthlete(raceData) {
     }).save().then(function(athlete) {
         log.info("Created athlete %s %s %s", raceData.athlinksId, raceData.firstName, raceData.lastName);
 
-        createAthleteRaceData(athlete, raceData);
+        createAthleteRaceData(athlete, raceData, callback);
     });
 }
 
-function createAthleteRaceData(athlete, raceData) {
+function createAthleteRaceData(athlete, raceData, callback) {
 
     var race = new Race({
         name: raceData.name,
@@ -84,6 +84,8 @@ function createAthleteRaceData(athlete, raceData) {
 
         }).save().then(function() {
             log.info("Athlete race data saved for %s %s", athlete.get('first_name'), athlete.get('last_name'));
+
+            callback();
         });
 
     });

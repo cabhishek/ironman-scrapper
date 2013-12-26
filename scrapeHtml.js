@@ -25,7 +25,10 @@ var db = require('./db/initialize')(),
     async.each(races, createRacePages, function(err) {
         if (err) throw err;
 
-        log.info("Scraping and persisting data finished");
+        log.info("Scraping and persisting finished !!!");
+
+        process.exit(0);
+
     });
 
 })();
@@ -44,9 +47,11 @@ function createRacePages(race, callback) {
     });
 
     async.concat(racePages, scrapePage, function(err, results) {
+
+        log.info("Total records to persist =>%s", results.length);
         //Once all scraping is done for a race year
         //then go persist all of it in DB.
-        persist(race, results);
+        persist(race, results, callback);
     });
 }
 
@@ -64,7 +69,7 @@ function scrapePage(racePage, callback) {
     });
 }
 
-function persist(race, results) {
+function persist(race, results, callback) {
 
     // Combine race + athelete race data
     _.each(results, function(athleteRace) {
@@ -73,5 +78,8 @@ function persist(race, results) {
 
     async.each(results, persistAthleteRace, function(err) {
         if (err) throw err;
+
+        log.info("Persisted all athlete race data sucessfully !!");
+        callback();
     });
 }
