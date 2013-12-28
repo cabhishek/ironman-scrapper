@@ -2,7 +2,7 @@ var raceHistory = require('./races/raceHistory'),
     helper = require('./helper'),
     http = require('client-http'),
     _ = require('underscore'),
-    get_url = require('./url'),
+    getUrl = require('./url'),
     mkdirp = require('mkdirp'),
     async = require('async'),
     path = require('path'),
@@ -56,7 +56,7 @@ function getRaceData(race, callback) {
 
 function downloadRawHtml(racePage, callback) {
 
-    var url = get_url(racePage),
+    var url = getUrl(racePage),
         fileName = helper.getFileName(racePage);
 
     http.get(url, function(raw_html, err) {
