@@ -51,7 +51,7 @@ function createAthleteRaceData(athlete, raceData, callback) {
 
     race.on('fetched', function(race) {
 
-        if (_.isUndefined(race) || _.isNull(race))
+        if (!race)
             throw "Failed to get race data";
 
         AthleteRace.forge({
