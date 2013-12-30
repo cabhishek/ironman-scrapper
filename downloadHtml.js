@@ -10,7 +10,7 @@ var raceHistory = require('./races/raceHistory'),
     Log = require('log'),
     log = new Log('info');
 
-(function main() {
+(function () {
 
     var raceName = process.argv[2] || "Ironman Florida",
         races = raceHistory(raceName),

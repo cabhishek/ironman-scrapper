@@ -4,7 +4,7 @@ var _ = require('underscore'),
 
 function getFolderName(race) {
 
-    var dataFolder = "htmldata",
+    var dataFolder = "data",
         foldername = _s.underscored(util.format('%s/%s/%s', dataFolder, race.name, race.year));
 
     return foldername;

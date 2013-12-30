@@ -7,7 +7,7 @@ var db = require('./initialize')(),
     log = new Log('info'),
     async = require('async');
 
-(function main() {
+(function () {
 
     var raceName = process.argv[2] || "Ironman Florida",
         races = appendQualifierId(raceHistory(raceName)),
@@ -69,6 +69,7 @@ function persist(raceData, callback) {
 function appendQualifierId(races) {
     var max = 99999;
     var min = 2999;
+
     var qualifierId = Math.floor(Math.random() * (max - min + 1) + min);
 
     log.info("qualifierId =>%s", qualifierId);

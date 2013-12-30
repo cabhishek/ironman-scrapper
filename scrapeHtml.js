@@ -10,7 +10,7 @@ var db = require('./db/initialize')(),
     Log = require('log'),
     log = new Log('info');
 
-(function main() {
+(function () {
 
     var raceName = process.argv[2] || "Ironman Florida",
         races = raceHistory(raceName),
@@ -80,6 +80,7 @@ function persist(race, results, callback) {
         if (err) throw err;
 
         log.info("Persisted all athlete race data sucessfully !!");
+
         callback();
     });
 }
