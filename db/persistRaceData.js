@@ -71,12 +71,22 @@ function persist(raceData, callback) {
                 log.info('Race =>%s year=>%s updated !!', raceData.name, raceData.year);
 
                 callback();
+            }).
+            catch (function(e) {
+                log.info(e.message);
+
+                callback();
             });
 
         } else {
 
             Race.forge(data).save().then(function() {
                 log.info('Race =>%s year=>%s saved!', raceData.name, raceData.year);
+
+                callback();
+            }).
+            catch (function(e) {
+                log.info(e.message);
 
                 callback();
             });

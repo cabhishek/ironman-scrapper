@@ -24,7 +24,12 @@ module.exports = function persistAthleteRace(raceData, callback) {
             } else {
                 createAthlete(raceData, callback);
             }
-        });
+        }).
+    catch (function(e) {
+        log.info(e.message);
+
+        callback();
+    });
 };
 
 function createAthlete(raceData, callback) {
@@ -38,6 +43,11 @@ function createAthlete(raceData, callback) {
         log.info("Created athlete %s %s %s", raceData.athlinksId, raceData.firstName, raceData.lastName);
 
         persistAthleteRaceData(athlete, raceData, callback);
+    }).
+    catch (function(e) {
+        log.info(e.message);
+
+        callback();
     });
 }
 
@@ -84,6 +94,11 @@ function persistAthleteRaceData(athlete, raceData, callback) {
 
         }).save().then(function() {
             log.info("Athlete race data saved for %s %s", athlete.get('first_name'), athlete.get('last_name'));
+
+            callback();
+        }).
+        catch (function(e) {
+            log.info(e.message);
 
             callback();
         });

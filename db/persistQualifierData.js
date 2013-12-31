@@ -94,6 +94,11 @@ function persist(qualifier, callback) {
                 log.info('Qualifier Race =>%s updated !!', qualifier.name);
 
                 callback();
+            }).
+            catch (function(e) {
+                log.info(e.message);
+
+                callback();
             });
 
         } else {
