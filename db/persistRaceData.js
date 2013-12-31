@@ -10,7 +10,7 @@ var db = require('./initialize')(),
 
 (function() {
 
-    var raceName = process.argv[2] || undefined,
+    var raceName = process.argv[2],
         // Comma sperated list "2009,2010"
         years = process.argv[3],
         races = [];
