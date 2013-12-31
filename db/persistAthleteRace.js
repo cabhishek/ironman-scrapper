@@ -20,7 +20,7 @@ module.exports = function persistAthleteRace(raceData, callback) {
         .then(function(athlete) {
 
             if (athlete) {
-                createAthleteRaceData(athlete, raceData, callback);
+                persistAthleteRaceData(athlete, raceData, callback);
             } else {
                 createAthlete(raceData, callback);
             }
@@ -37,11 +37,11 @@ function createAthlete(raceData, callback) {
     }).save().then(function(athlete) {
         log.info("Created athlete %s %s %s", raceData.athlinksId, raceData.firstName, raceData.lastName);
 
-        createAthleteRaceData(athlete, raceData, callback);
+        persistAthleteRaceData(athlete, raceData, callback);
     });
 }
 
-function createAthleteRaceData(athlete, raceData, callback) {
+function persistAthleteRaceData(athlete, raceData, callback) {
 
     var race = new Race({
         name: raceData.name,
