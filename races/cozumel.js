@@ -1,4 +1,4 @@
-var cozumel = {
+module.exports = {
     "Ironman Cozumel": [{
         name: "Ironman Cozumel",
         eventId: 115006,
@@ -32,5 +32,3 @@ var cozumel = {
         scraperName: 'without_time'
     }]
 };
-
-exports.cozumel = cozumel;

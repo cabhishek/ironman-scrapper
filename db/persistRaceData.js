@@ -1,23 +1,41 @@
 var db = require('./initialize')(),
     Race = require('../models/race'),
+    raceNames = require('../races/raceNames'),
     raceHistory = require('../races/raceHistory'),
-    helper = require('../helper'),
+    helper = require('../utils/helper'),
     _ = require('underscore'),
     Log = require('log'),
     log = new Log('info'),
     async = require('async');
 
-(function () {
+(function() {
 
-    var raceName = process.argv[2] || "Ironman Florida",
-        races = appendQualifierId(raceHistory(raceName)),
+    var raceName = process.argv[2] || undefined,
         // Comma sperated list "2009,2010"
-        years = process.argv[3];
+        years = process.argv[3],
+        races = [];
 
-    log.info("RaceName =>%s", raceName);
+    if (!raceName) {
 
-    if (years)
+        log.info("Persisting data for all race");
+
+        _.each(raceNames, function(raceName) {
+            races.push(appendQualifierId(raceHistory(raceName)));
+
+            //Each race data is in an array. Hence flatten it out for
+            //multiple races.
+            races = _.flatten(races);
+        });
+
+    } else {
+        races = appendQualifierId(raceHistory(raceName));
+    }
+
+    if (years) {
+        log.info("Years =>%s", years);
+
         races = helper.filterByYear(races, years);
+    }
 
     async.each(races, persist, function(err) {
         if (err) throw err;
@@ -48,7 +66,6 @@ function persist(raceData, callback) {
         };
 
         if (race) {
-            log.info("Race already saved.. updating...");
 
             race.save(data).then(function() {
                 log.info('Race =>%s year=>%s updated !!', raceData.name, raceData.year);
@@ -57,8 +74,9 @@ function persist(raceData, callback) {
             });
 
         } else {
+
             Race.forge(data).save().then(function() {
-                log.info('Race =>%s year=>%s saved !!', raceData.name, raceData.year);
+                log.info('Race =>%s year=>%s saved!', raceData.name, raceData.year);
 
                 callback();
             });
@@ -72,7 +90,7 @@ function appendQualifierId(races) {
 
     var qualifierId = Math.floor(Math.random() * (max - min + 1) + min);
 
-    log.info("qualifierId =>%s", qualifierId);
+    log.info("QualifierId =>%s", qualifierId);
 
     _.each(races, function(race) {
         race.qualifierId = qualifierId;

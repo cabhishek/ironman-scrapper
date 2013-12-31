@@ -1,4 +1,4 @@
-var malaysia = {
+module.exports = {
     "Ironman Malaysia": [{
         name: "Ironman Malaysia",
         eventId: 117935,
@@ -51,4 +51,3 @@ var malaysia = {
         type: 0,
     }]
 };
-exports.malaysia = malaysia;

@@ -1,4 +1,4 @@
-var kona = {
+module.exports = {
     "Ironman World Championships": [{
         name: "Ironman World Championships",
         eventId: 313500,
@@ -101,4 +101,3 @@ var kona = {
         type: 0
     }]
 };
-exports.kona = kona;

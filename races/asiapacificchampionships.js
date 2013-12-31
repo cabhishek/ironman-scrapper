@@ -1,4 +1,4 @@
-var asiapacificchampionships = {
+module.exports = {
     "Ironman 70.3 Asia Pacific Championships": [{
         name: "Ironman 70.3 Asia Pacific Championships",
         eventId: 243971,
@@ -9,4 +9,3 @@ var asiapacificchampionships = {
         scraperName: 'without_time'
     }]
 };
-exports.asiapacificchampionships = asiapacificchampionships;

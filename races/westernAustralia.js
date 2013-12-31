@@ -1,6 +1,7 @@
-var westernAustralia = {
+module.exports = {
     "Ironman Western Australia": [{
         name: "Ironman Western Australia",
+        type: 0,
         eventId: 190466,
         courseId: 340588,
         pages: 13,
@@ -8,18 +9,21 @@ var westernAustralia = {
         scraperName: 'without_time'
     }, {
         name: "Ironman Western Australia",
+        type: 0,
         eventId: 152456,
         courseId: 208509,
         pages: 12,
         year: 2011
     }, {
         name: "Ironman Western Australia",
+        type: 0,
         eventId: 145954,
         courseId: 167868,
         pages: 12,
         year: 2010
     }, {
         name: "Ironman Western Australia",
+        type: 0,
         eventId: 109863,
         courseId: 150025,
         pages: 12,
@@ -27,6 +31,7 @@ var westernAustralia = {
         scraperName: 'without_time'
     }, {
         name: "Ironman Western Australia",
+        type: 0,
         eventId: 52791,
         courseId: 78858,
         pages: 11,
@@ -34,6 +39,7 @@ var westernAustralia = {
         scraperName: 'without_time'
     }, {
         name: "Ironman Western Australia",
+        type: 0,
         eventId: 55126,
         courseId: 82035,
         pages: 9,
@@ -41,6 +47,7 @@ var westernAustralia = {
         scraperName: 'without_time'
     }, {
         name: "Ironman Western Australia",
+        type: 0,
         eventId: 21902,
         courseId: 32109,
         pages: 8,
@@ -48,6 +55,7 @@ var westernAustralia = {
         scraperName: 'without_time'
     }, {
         name: "Ironman Western Australia",
+        type: 0,
         eventId: 8578,
         courseId: 11515,
         pages: 6,
@@ -55,5 +63,3 @@ var westernAustralia = {
         scraperName: 'without_time'
     }]
 };
-
-exports.westernAustralia = westernAustralia;

@@ -1,4 +1,4 @@
-var laketahoe = {
+module.exports = {
     "Ironman Lake Tahoe": [{
         name: "Ironman Lake Tahoe",
         eventId: 215357,
@@ -9,5 +9,3 @@ var laketahoe = {
         scraperName: 'without_time'
     }]
 };
-
-exports.laketahoe = laketahoe;

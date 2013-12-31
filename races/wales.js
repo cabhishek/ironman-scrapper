@@ -1,4 +1,4 @@
-var wales = {
+module.exports =  {
     "Ironman Wales": [{
         name: "Ironman Wales",
         eventId: 240797,
@@ -23,4 +23,4 @@ var wales = {
         type: 0,
     }]
 };
-exports.wales = wales;
+

@@ -1,4 +1,4 @@
-var florida = {
+module.exports = {
 
     "Ironman Florida": [{
         name: "Ironman Florida",
@@ -87,5 +87,3 @@ var florida = {
         type: 0
     }]
 };
-
-exports.florida = florida;

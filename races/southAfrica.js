@@ -1,4 +1,4 @@
-var southAfrica = {
+module.exports = {
     "Ironman South Africa": [{
         name: "Ironman South Africa",
         eventId: 250355,
@@ -74,5 +74,3 @@ var southAfrica = {
         type: 0
     }]
 };
-
-exports.southAfrica = southAfrica;

@@ -1,4 +1,4 @@
-var arizona = {
+module.exports = {
     "Ironman Arizona": [{
         name: "Ironman Arizona",
         eventId: 225521,
@@ -58,5 +58,3 @@ var arizona = {
         year: 2005
     }]
 };
-
-exports.arizona = arizona;

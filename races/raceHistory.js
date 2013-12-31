@@ -1,35 +1,28 @@
-var florida = require('./florida').florida,
-    arizona = require('./arizona').arizona,
-    cozumel = require('./cozumel').cozumel,
-    westernAustralia = require('./westernAustralia').westernAustralia,
-    newZealand = require('./newZealand').newZealand,
-    southAfrica = require('./southAfrica').southAfrica,
-    australia = require('./australia').australia,
-    croix = require('./croix').croix,
-    wales = require('./wales').wales,
-    laketahoe = require('./laketahoe').laketahoe,
-    asiapacificchampionships = require('./asiapacificchampionships').asiapacificchampionships,
-    kona = require('./kona').kona,
-    malaysia = require('./malaysia').malaysia,
-    _ = require('underscore');
+var _ = require('underscore');
 
-module.exports = function race(raceName){
+module.exports = function race(raceName) {
     var raceData = {};
 
-    //Add data of a particular race
-    _.extend(raceData, asiapacificchampionships);
-    _.extend(raceData, florida);
-    _.extend(raceData, arizona);
-    _.extend(raceData, cozumel);
-    _.extend(raceData, westernAustralia);
-    _.extend(raceData, newZealand);
-    _.extend(raceData, southAfrica);
-    _.extend(raceData, australia);
-    _.extend(raceData, croix);
-    _.extend(raceData, laketahoe);
-    _.extend(raceData, kona);
-    _.extend(raceData, malaysia);
+    //Add data for ironman qualifiers
+    _.extend(raceData, require('./asiapacificchampionships'));
+    _.extend(raceData, require('./florida'));
+    _.extend(raceData, require('./arizona'));
+    _.extend(raceData, require('./cozumel'));
+    _.extend(raceData, require('./westernAustralia'));
+    _.extend(raceData, require('./newZealand'));
+    _.extend(raceData, require('./southAfrica'));
+    _.extend(raceData, require('./australia'));
+    _.extend(raceData, require('./croix'));
+    _.extend(raceData, require('./laketahoe'));
+    _.extend(raceData, require('./kona'));
+    _.extend(raceData, require('./malaysia'));
+    _.extend(raceData, require('./wales'));
+
+
+    if (!raceName)
+        return raceData;
+
+    console.log("Getting race data for =>%s", raceName);
 
     return raceData[raceName];
 };
-

@@ -1,4 +1,4 @@
-var croix = {
+module.exports = {
     "Ironman St. Croix 70.3": [{
         name: "Ironman St. Croix 70.3",
         eventId: 284699,
@@ -103,5 +103,3 @@ var croix = {
         scraperName: 'without_time'
     }]
 };
-
-exports.croix = croix;

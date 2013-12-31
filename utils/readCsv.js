@@ -1,4 +1,5 @@
-var csv = require("csv-streamify"),
+var csv = require('csv-streamify'),
+    settings = require('../settings'),
     fs = require('fs'),
     Log = require('log'),
     log = new Log('info'),
@@ -6,9 +7,7 @@ var csv = require("csv-streamify"),
 
 module.exports = function(fileName, callback) {
 
-    var appDir = path.dirname(require.main.filename),
-
-        stream = fs.createReadStream(appDir + "/data/" + fileName),
+    var stream = fs.createReadStream(settings.PROJECT_DIR + "/data/" + fileName),
 
         csvStream = csv({
             delimiter: ",",
@@ -22,6 +21,8 @@ module.exports = function(fileName, callback) {
     csvStream.on("data", function(data) {
         dataObjs.push(data);
     });
+
+    log.info("Root dir =>%s", settings.PROJECT_DIR);
 
     // pump some data into pipe
     stream.pipe(csvStream);
