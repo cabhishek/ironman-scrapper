@@ -1,5 +1,6 @@
 var db = require('./initialize')(),
     Race = require('../models/race'),
+    Qualifier = require('../models/qualifier'),
     helper = require('../utils/helper'),
     readCsv = require('../utils/readCsv'),
     _ = require('underscore'),
@@ -7,52 +8,98 @@ var db = require('./initialize')(),
     log = new Log('info'),
     async = require('async');
 
-(function () {
+(function() {
 
-    readCsv('qualifier_data.csv', function(err, results){
+    readCsv('qualifier_data.csv', function(err, results) {
 
-        _.each(results, function(result){
-            log.info(result);
+        log.info("Total qualifier data count =>%s" % results.length);
+
+        async.each(results, persist, function(err) {
+            if (err) throw err;
+
+            process.exit(0);
+
         });
     });
 
 })();
 
-function persist(raceData, callback) {
+function persist(qualifier, callback) {
 
     var race = new Race({
-        name: raceData.name,
-        athlinks_event_id: raceData.eventId,
-        athlinks_course_id: raceData.courseId
+        name: qualifier.name,
     });
+
+    log.info("Fetching race =>%s", qualifier.name);
 
     race.fetch().then(function(race) {
 
-        var data = {
-            name: raceData.name,
-            year: raceData.year,
-            type: raceData.type,
-            athlinks_event_id: raceData.eventId,
-            athlinks_course_id: raceData.courseId,
-            qualifier_id: raceData.qualifierId
-
-        };
-
         if (race) {
-            log.info("Race already saved.. updating...");
 
-            race.save(data).then(function() {
-                log.info('Race =>%s year=>%s updated !!', raceData.name, raceData.year);
+            log.info("Found data for =>%s", qualifier.name);
+            log.info("Qualifier id =>%s", race.get('qualifier_id'));
+
+            var data = {
+
+                name: qualifier.name,
+                qualifier_id: race.get('qualifier_id'),
+
+                month: qualifier.month,
+                location: qualifier.location,
+                zip_code: qualifier.zipCode,
+                race_type: qualifier.raceType,
+
+                qualifying_slots: qualifier.qualifyingSlots,
+                sunrise: qualifier.sunrise,
+                sunset: qualifier.sunset,
+
+                avg_high_temp: qualifier.avgHighTemp,
+                avg_low_temp: qualifier.avgLowTemp,
+                avg_high_humidity: qualifier.avgHighHumidity,
+                avg_low_humidity: qualifier.avgLowHumidity,
+
+                avg_high_dew_point: qualifier.avgHighDewPoint,
+                avg_peak_wind_speed: qualifier.avgPeakWindSpeed,
+
+                probability_of_precipitation: qualifier.probabilityOfPrecipitation,
+                probability_of_cloudcover: qualifier.probabilityOfCloudCover,
+
+                starting_elevation: qualifier.startingElevation,
+                max_elevation: qualifier.maxElevation,
+
+                gross_evelation_gain: qualifier.grossEvelationGain,
+                avg_water_temperature: qualifier.avgWaterTemperature,
+
+                water_body: qualifier.waterBody,
+                water_type: qualifier.waterType,
+
+                swim_start_location: qualifier.swimStartLocation,
+                swim_start_type: qualifier.swimStartType,
+                current: qualifier.current,
+
+                wetsuit_legal: qualifier.wetsuitLegal,
+                avg_temp_bike: qualifier.avgTempBike,
+                starting_elevation_bike: qualifier.startingElevationBike,
+
+                max_elevation_bike: qualifier.maxElevationBike,
+                gross_elevation_gain_bike: qualifier.grossElevationGainBike,
+
+                avg_temp_run: qualifier.avgTempRun,
+                starting_elevation_run: qualifier.startingElevationRun,
+                max_elevation_run: qualifier.maxElevationRun,
+                gross_elevation_gain_run: qualifier.grossElevationGainRun
+            };
+
+            Qualifier.forge(data).save().then(function() {
+                log.info('Qualifier Race =>%s updated !!', qualifier.name);
 
                 callback();
             });
 
         } else {
-            Race.forge(data).save().then(function() {
-                log.info('Race =>%s year=>%s saved !!', raceData.name, raceData.year);
 
-                callback();
-            });
+            log.info("Race %s not found skipping !!", qualifier.name);
+            callback();
         }
     });
 }
