@@ -17,6 +17,7 @@ module.exports = function race(raceName) {
     _.extend(raceData, require('./kona'));
     _.extend(raceData, require('./malaysia'));
     _.extend(raceData, require('./wales'));
+    _.extend(raceData, require('./wisconsin'));
 
 
     if (!raceName)
