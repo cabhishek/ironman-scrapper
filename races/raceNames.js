@@ -12,5 +12,8 @@ module.exports = [
      "Ironman World Championships",
      "Ironman Malaysia",
      "Ironman Wales",
-     "Ironman Wisconsin"
+     "Ironman Wisconsin",
+     "Ironman Japan",
+     "Ironman Louisville",
+     "Ironman Copenhagen"
 ];

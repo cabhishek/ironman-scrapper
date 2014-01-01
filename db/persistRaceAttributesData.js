@@ -9,7 +9,7 @@ var db = require('./initialize')(),
 
 (function() {
 
-    readCsv('race_data.csv', function(err, results) {
+    readCsv('race_attributes_data.csv', function(err, results) {
 
         log.info("Total race attributes data count =>%s", results.length);
 
