@@ -29,7 +29,7 @@ function persist(raceAttribute, callback) {
         race_name = _.first(names, names.length - 1).join(' '),
         race_year = _.last(names);
 
-    // log.info("Fetching race =>%s year=>%s", race_name, race_year);
+    log.info("Fetching race =>%s year=>%s", race_name, race_year);
 
     var race = new Race({
         name: race_name,
@@ -43,8 +43,8 @@ function persist(raceAttribute, callback) {
 
         if (race) {
 
-            // log.info("Found data for =>%s", race_name);
-            // log.info("qualifier id =>%s", race.get('qualifier_id'));
+            log.info("Found data for =>%s", race_name);
+            log.info("qualifier id =>%s", race.get('qualifier_id'));
 
             var data = {
 
@@ -103,7 +103,7 @@ function persist(raceAttribute, callback) {
                 patch: true
             }).then(function() {
 
-                // log.info('Race =>%s updated with attributes !!', raceAttribute.name);
+                log.info('Race =>%s updated with attributes !!', raceAttribute.name);
 
                 callback();
             }).
