@@ -24,5 +24,16 @@ module.exports = [
      "Ironman Lake Placid",
      "Ironman UK",
      "Ironman France",
-     "Ironman European Championships"
+     "Ironman European Championships",
+     "Ironman Coeur d’Alene",
+     "Ironman Austria",
+     "Ironman 70.3 Japan",
+     "Ironman 70.3 Eagleman",
+     "Ironman Cairns",
+     "Ironman 70.3 Hawaii",
+     "Ironman Florianopolis",
+     "Ironman Lanzarote",
+     "Ironman Texas",
+     "Ironman Los Cabos",
+     "Ironman Asia Pacific Championships"
 ];

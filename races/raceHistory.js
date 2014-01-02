@@ -4,6 +4,7 @@ module.exports = function race(raceName) {
     var raceData = {};
 
     //Add data for ironman qualifiers
+    _.extend(raceData, require('./703asiapacificchampionships'));
     _.extend(raceData, require('./asiapacificchampionships'));
     _.extend(raceData, require('./florida'));
     _.extend(raceData, require('./arizona'));
@@ -30,6 +31,16 @@ module.exports = function race(raceName) {
     _.extend(raceData, require('./uk'));
     _.extend(raceData, require('./france'));
     _.extend(raceData, require('./fulleurochampionships'));
+    _.extend(raceData, require('./coeurdalene'));
+    _.extend(raceData, require('./austria'));
+    _.extend(raceData, require('./703japan'));
+    _.extend(raceData, require('./703eagleman'));
+    _.extend(raceData, require('./cairns'));
+    _.extend(raceData, require('./703hawaii'));
+    _.extend(raceData, require('./florianopolis'));
+    _.extend(raceData, require('./lanzarote'));
+    _.extend(raceData, require('./texas'));
+    _.extend(raceData, require('./loscabos'));
 
 
     if (!raceName)

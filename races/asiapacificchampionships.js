@@ -1,11 +1,18 @@
 module.exports = {
-    "Ironman 70.3 Asia Pacific Championships": [{
-        name: "Ironman 70.3 Asia Pacific Championships",
-        eventId: 243971,
-        courseId: 342477,
-        pages: 9,
+    "Ironman Asia Pacific Championships": [{
+        name: "Ironman Asia Pacific Championships",
+        eventId: 234644,
+        courseId: 376903,
+        pages: 19,
         year: 2013,
         type: 0,
         scraperName: 'without_time'
+    }, {
+        name: "Ironman Asia Pacific Championships",
+        eventId: 176220,
+        courseId: 242050,
+        pages: 15,
+        year: 2012,
+        type: 0,
     }]
 };
