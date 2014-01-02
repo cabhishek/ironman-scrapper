@@ -15,5 +15,14 @@ module.exports = [
      "Ironman Wisconsin",
      "Ironman Japan",
      "Ironman Louisville",
-     "Ironman Copenhagen"
+     "Ironman Copenhagen",
+     "Ironman 70.3 European Championships",
+     "Ironman North American Championships",
+     "Ironman Sweden",
+     "Ironman Canada",
+     "Ironman Switzerland",
+     "Ironman Lake Placid",
+     "Ironman UK",
+     "Ironman France",
+     "Ironman European Championships"
 ];

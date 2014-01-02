@@ -29,19 +29,22 @@ function persist(raceAttribute, callback) {
         race_name = _.first(names, names.length - 1).join(' '),
         race_year = _.last(names);
 
-    log.info("Fetching race =>%s year=>%s", race_name, race_year);
+    // log.info("Fetching race =>%s year=>%s", race_name, race_year);
 
     var race = new Race({
         name: race_name,
         year: race_year
     });
 
+    log.info("Before ->%s", (raceAttribute.startingElevation));
+    log.info("After ->%s", _clean(raceAttribute.startingElevation));
+
     race.fetch().then(function(race) {
 
         if (race) {
 
-            log.info("Found data for =>%s", race_name);
-            log.info("qualifier id =>%s", race.get('qualifier_id'));
+            // log.info("Found data for =>%s", race_name);
+            // log.info("qualifier id =>%s", race.get('qualifier_id'));
 
             var data = {
 
@@ -50,10 +53,10 @@ function persist(raceAttribute, callback) {
                 location: raceAttribute.location,
 
                 race_type: raceAttribute.raceType,
-                registered_athletes: raceAttribute.registeredAthletes,
+                registered_athletes: _clean(raceAttribute.registeredAthletes),
 
-                starting_athletes: raceAttribute.startingAthletes,
-                finishing_athletes: raceAttribute.finishingAthletes,
+                starting_athletes: _clean(raceAttribute.startingAthletes),
+                finishing_athletes: _clean(raceAttribute.finishingAthletes),
 
                 qualifying_slots: raceAttribute.qualifyingSlots,
                 sunrise: raceAttribute.Sunrise,
@@ -69,9 +72,10 @@ function persist(raceAttribute, callback) {
                 peak_wind_speed: raceAttribute.peakWindSpeed,
 
                 cloud_cover: raceAttribute.cloudCover,
-                starting_elevation: raceAttribute.startingElevation,
-                max_elevation: raceAttribute.maxElevation,
-                gross_elevation_gain: raceAttribute.grossElevationGain,
+
+                starting_elevation: _clean(raceAttribute.startingElevation),
+                max_elevation: _clean(raceAttribute.maxElevation),
+                gross_elevation_gain: _clean(raceAttribute.grossElevationGain),
 
                 water_temperature: raceAttribute.waterTemperature,
                 water_body: raceAttribute.waterBody,
@@ -82,15 +86,16 @@ function persist(raceAttribute, callback) {
                 current: raceAttribute.current,
                 wetsuit_legal: raceAttribute.wetsuitLegal,
                 temp_bike: raceAttribute.tempBike,
-                starting_elevation_bike: raceAttribute.startingElevationBike,
 
-                max_elevation_bike: raceAttribute.maxElevationBike,
-                gross_elevation_gain_bike: raceAttribute.grossElevationGainBike,
+                starting_elevation_bike: _clean(raceAttribute.startingElevationBike),
+                max_elevation_bike: _clean(raceAttribute.maxElevationBike),
+                gross_elevation_gain_bike: _clean(raceAttribute.grossElevationGainBike),
+
                 temp_run: raceAttribute.tempRun,
-                starting_elevation_run: raceAttribute.startingElevationRun,
 
-                max_elevation_run: raceAttribute.maxElevationRun,
-                gross_elevation_gain_run: raceAttribute.grossElevationGainRun
+                starting_elevation_run: _clean(raceAttribute.startingElevationRun),
+                max_elevation_run: _clean(raceAttribute.maxElevationRun),
+                gross_elevation_gain_run: _clean(raceAttribute.grossElevationGainRun)
 
             };
 
@@ -98,7 +103,7 @@ function persist(raceAttribute, callback) {
                 patch: true
             }).then(function() {
 
-                log.info('Race =>%s updated with attributes !!', raceAttribute.name);
+                // log.info('Race =>%s updated with attributes !!', raceAttribute.name);
 
                 callback();
             }).
@@ -119,4 +124,9 @@ function persist(raceAttribute, callback) {
         log.info(e.message);
         callback();
     });
+}
+
+function _clean(value){
+
+    return value.replace(",","");
 }

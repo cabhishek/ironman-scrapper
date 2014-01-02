@@ -21,6 +21,15 @@ module.exports = function race(raceName) {
     _.extend(raceData, require('./japan'));
     _.extend(raceData, require('./louisville'));
     _.extend(raceData, require('./copenhagen'));
+    _.extend(raceData, require('./eurochampionships'));
+    _.extend(raceData, require('./northamericanchampionships'));
+    _.extend(raceData, require('./sweden'));
+    _.extend(raceData, require('./canada'));
+    _.extend(raceData, require('./switzerland'));
+    _.extend(raceData, require('./lakeplacid'));
+    _.extend(raceData, require('./uk'));
+    _.extend(raceData, require('./france'));
+    _.extend(raceData, require('./fulleurochampionships'));
 
 
     if (!raceName)
