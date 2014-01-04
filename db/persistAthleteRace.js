@@ -20,7 +20,9 @@ module.exports = function persistAthleteRace(raceData, callback) {
         .then(function(athlete) {
 
             if (athlete) {
+                log.info("Found athlete %s %s", athlete.get('first_name'), athlete.get('last_name'));
                 persistAthleteRaceData(athlete, raceData, callback);
+
             } else {
                 createAthlete(raceData, callback);
             }

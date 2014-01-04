@@ -48,7 +48,7 @@ function createRacePages(race, callback) {
 
     async.concat(racePages, scrapePage, function(err, results) {
 
-        log.info("Total records to persist =>%s", results.length);
+        log.info("Total records to persist =>%s for race =>%s %s", results.length, race.name, race.year);
         //Once all scraping is done for a race year
         //then go persist all of it in DB.
         persist(race, results, callback);
