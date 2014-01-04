@@ -1,5 +1,6 @@
 var withTransitionTime = require('./withTransitionTime'),
     withoutTransitionTime = require('./withoutTransitionTime'),
+    withSingleTransitionTime = require('./withSingleTransitionTime'),
     newSite = require('./newSite'),
     _ = require('underscore'),
     Log = require('log'),
@@ -21,7 +22,7 @@ module.exports = function scrape(rawHtml, scraperName) {
         "without_time": withoutTransitionTime
     });
     _.extend(scrapers, {
-        "new_site": newSite
+        "with_single_time": withSingleTransitionTime
     });
 
     return scrapers[scraperName](rawHtml);

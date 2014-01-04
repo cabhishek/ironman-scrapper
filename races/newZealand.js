@@ -5,7 +5,8 @@ module.exports = {
         eventId: 197331,
         courseId: 223773,
         pages: 15,
-        year: 2012
+        year: 2012,
+        scraperName: "with_single_time"
     }, {
         name: "Ironman New Zealand",
         type: 0,
