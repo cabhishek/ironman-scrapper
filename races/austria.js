@@ -104,4 +104,4 @@ module.exports = {
         type: 0,
         scraperName: 'without_time'
     }]
-}; 
+};
