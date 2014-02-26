@@ -25,7 +25,7 @@ module.exports = [
      "Ironman UK",
      "Ironman France",
      "Ironman European Championships",
-     "Ironman Coeur d'Alene",
+     "Ironman Coeur d Alene",
      "Ironman Austria",
      "Ironman 70.3 Japan",
      "Ironman 70.3 Eagleman",
