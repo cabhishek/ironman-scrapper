@@ -19,6 +19,10 @@ from athletes a join athlete_races ar on a.id = ar.athlete_id
 join races r on r.id = ar.race_id
 where a.`id` != 150998;
 
+select *
+from athlete_races ar
+join races r on ar.`race_id` = r.`id`
+join qualifiers q on q.`qualifier_id` = r.`qualifier_id`;
 
 select count(*), a.first_name, a.last_name , a.id, a.athlinks_id
 from athletes a join athlete_races ar on a.id = ar.athlete_id
