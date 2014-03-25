@@ -1,9 +1,7 @@
 var AthleteRace = require('../models/athleteRace'),
     Athlete = require('../models/athlete'),
     Race = require('../models/race'),
-    _s = require('underscore.string'),
     _ = require('underscore'),
-    async = require('async'),
     Log = require('log'),
     log = new Log('info');
 
