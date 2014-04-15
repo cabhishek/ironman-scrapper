@@ -3,3 +3,4 @@ ironman_*/
 node_modules
 data
 temp.*
+*.log
