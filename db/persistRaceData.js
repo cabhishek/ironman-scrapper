@@ -1,7 +1,7 @@
 var db = require('./initialize')(),
     Race = require('../models/race'),
-    raceNames = require('../races/raceNames'),
-    raceHistory = require('../races/raceHistory'),
+    raceNames = require('../raceConfig/raceNames'),
+    raceHistory = require('../raceConfig/raceHistory'),
     helper = require('../utils/helper'),
     _ = require('underscore'),
     Log = require('log'),
@@ -66,7 +66,7 @@ function persist(raceData, callback) {
         if (race) {
             //Update race details
             race.save(data, {patch: true}).then(function() {
-                log.info('Race =>%s year=>%s updated !!', raceData.name, raceData.year);
+                log.info('Race =>%s year=>%s updated!', raceData.name, raceData.year);
 
                 callback();
             }).

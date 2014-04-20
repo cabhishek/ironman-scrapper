@@ -1,4 +1,4 @@
-module.exports == {
+module.exports = {
     "Ironman 70.3 New Orleans": [{
         name: "Ironman 70.3 New Orleans",
         eventId: 68879,

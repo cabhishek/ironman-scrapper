@@ -5,7 +5,7 @@ module.exports = {
         courseId: 342477,
         pages: 9,
         year: 2013,
-        type: 0,
+        type: 1,
         scraperName: 'without_time'
     }]
 };
