@@ -1,6 +1,6 @@
 var db = require('./db/initialize')(),
     persistAthleteRace = require('./db/persistAthleteRace'),
-    raceHistory = require('./races/raceHistory'),
+    raceHistory = require('./raceConfig/raceHistory'),
     scrape = require('./scraper/scrape'),
     helper = require('./utils/helper'),
     _ = require('underscore'),

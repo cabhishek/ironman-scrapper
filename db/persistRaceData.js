@@ -17,7 +17,7 @@ var db = require('./initialize')(),
 
     if (!raceName) {
 
-        log.info("Persisting data for all race");
+        log.info("Persisting data for all races");
 
         _.each(raceNames, function(raceName) {
             races.push(appendQualifierId(raceHistory(raceName)));
@@ -61,13 +61,11 @@ function persist(raceData, callback) {
             type: raceData.type,
             athlinks_event_id: raceData.eventId,
             athlinks_course_id: raceData.courseId,
-            qualifier_id: raceData.qualifierId
-
         };
 
         if (race) {
-
-            race.save(data).then(function() {
+            //Update race details
+            race.save(data, {patch: true}).then(function() {
                 log.info('Race =>%s year=>%s updated !!', raceData.name, raceData.year);
 
                 callback();
@@ -79,6 +77,9 @@ function persist(raceData, callback) {
             });
 
         } else {
+
+            //Insert new race data
+            _.extend(data, {qualifier_id: raceData.qualifierId});
 
             Race.forge(data).save().then(function() {
                 log.info('Race =>%s year=>%s saved!', raceData.name, raceData.year);

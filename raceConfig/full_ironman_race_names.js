@@ -1,5 +1,4 @@
 module.exports = [
-     "Ironman 70.3 Asia Pacific Championships",
      "Ironman Florida",
      "Ironman Arizona",
      "Ironman Cozumel",
@@ -7,7 +6,6 @@ module.exports = [
      "Ironman New Zealand",
      "Ironman South Africa",
      "Ironman Australia",
-     "Ironman St. Croix 70.3",
      "Ironman Lake Tahoe",
      "Ironman World Championships",
      "Ironman Malaysia",
@@ -16,7 +14,6 @@ module.exports = [
      "Ironman Japan",
      "Ironman Louisville",
      "Ironman Copenhagen",
-     "Ironman 70.3 European Championships",
      "Ironman North American Championships",
      "Ironman Sweden",
      "Ironman Canada",
@@ -27,13 +24,9 @@ module.exports = [
      "Ironman European Championships",
      "Ironman Coeur d Alene",
      "Ironman Austria",
-     "Ironman 70.3 Japan",
-     "Ironman 70.3 Eagleman",
      "Ironman Cairns",
-     "Ironman 70.3 Hawaii",
      "Ironman Florianopolis",
      "Ironman Lanzarote",
      "Ironman Texas",
      "Ironman Los Cabos",
-     "Ironman Asia Pacific Championships"
 ];

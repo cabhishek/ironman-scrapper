@@ -1,4 +1,4 @@
-var raceHistory = require('./races/raceHistory'),
+var raceHistory = require('./raceConfig/raceHistory'),
     helper = require('./utils/helper'),
     http = require('client-http'),
     _ = require('underscore'),
