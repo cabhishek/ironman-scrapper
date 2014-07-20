@@ -131,3 +131,17 @@ CREATE TABLE `athlete_races` (
   CONSTRAINT `race_id_refs_id_91d5196a` FOREIGN KEY (`race_id`) REFERENCES `races` (`id`),
   CONSTRAINT `athlete_id_refs_id_91d5196a` FOREIGN KEY (`athlete_id`) REFERENCES `athletes` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2000 DEFAULT CHARSET=latin1;
+
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(30) NOT NULL UNIQUE,
+  `first_name` varchar(30) NULL,
+  `last_name` varchar(30) NULL,
+  `email` varchar(75) NOT NULL UNIQUE,
+  `password` varchar(255) NULL,
+  `athlete_id` int(11) NULL,
+  `modified` datetime NOT NULL,
+  `created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `user_fbfc09f1` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=latin1;
