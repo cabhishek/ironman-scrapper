@@ -5,6 +5,6 @@ module.exports = {
         courseId: 0,
         pages: 13,
         year: 2012,
-        type: 0,
+        type: 1,
     }]
 };
