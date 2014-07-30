@@ -21,7 +21,6 @@ var raceHistory = require('./raceConfig/raceHistory'),
 
     async.each(races, getRaceData, function(err) {
         if (err) throw err
-
     })
 
 })()
@@ -66,7 +65,6 @@ function downloadRawHtml(racePage, callback) {
             if (err) throw err
 
             log.info("The %s was saved!", fileName)
-
         })
     })
 }

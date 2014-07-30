@@ -32,7 +32,12 @@ function filterByYear(races, years) {
     return _.flatten(temp);
 }
 
+function trim(str) {
+    return str.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+}
+
 exports.getFolderName = getFolderName;
 exports.getFileName = getFileName;
 exports.createPages = createPages;
 exports.filterByYear = filterByYear;
+exports.trim = trim;

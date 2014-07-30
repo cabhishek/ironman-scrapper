@@ -2,6 +2,7 @@ var cheerio = require('cheerio'),
     _s = require('underscore.string'),
     _ = require('underscore'),
     util = require('util'),
+    helper = require('./../utils/helper'),
     fs = require('fs')
 
 module.exports = function scrape(rawHtml) {
@@ -36,19 +37,9 @@ module.exports = function scrape(rawHtml) {
         var age = row.find(':nth-child(7)').text()
         var bib = row.find(':nth-child(8)').text()
 
-        var swimTime = row.find(':nth-child(9)').text()
-        var swimPace = row.find(':nth-child(10)').text()
-        var swimAgo = row.find(':nth-child(11)').text()
+        var finalTime = row.find(':nth-child(9)').text()
 
-        var cycleTime = row.find(':nth-child(12)').text()
-        var cycleSpeed = row.find(':nth-child(13)').text()
-        var cycleAgo = row.find(':nth-child(14)').text()
-
-        var runTime = row.find(':nth-child(15)').text()
-        var runPace = row.find(':nth-child(16)').text()
-        var runAgo = row.find(':nth-child(17)').text()
-
-        var finalTime = row.find(':nth-child(18)').text()
+        var runPace = helper.trim(row.find(':nth-child(10)').text())
 
         rows.push({
             "claimed": claimed,
@@ -59,20 +50,19 @@ module.exports = function scrape(rawHtml) {
             "m_f": m_f,
             "age": age,
             "bib": bib,
-            "swimTime": swimTime,
-            "swimPace": swimPace,
-            "swimAgo": swimAgo,
+            "swimTime": 0,
+            "swimPace": 0,
+            "swimAgo": 0,
             "t1": "",
-            "cycleTime": cycleTime,
-            "cycleSpeed": cycleSpeed,
-            "cycleAgo": cycleAgo,
+            "cycleTime": 0,
+            "cycleSpeed": 0,
+            "cycleAgo": 0,
             "t2": "",
-            "runTime": runTime,
+            "runTime": 0,
             "runPace": runPace,
-            "runAgo": _cleanupAgo(runAgo),
+            "runAgo": 0,
             "finalTime": finalTime
         })
-
     })
 
     return rows
