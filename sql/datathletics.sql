@@ -145,3 +145,17 @@ CREATE TABLE `user` (
   PRIMARY KEY (`id`),
   KEY `user_fbfc09f1` (`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=latin1;
+
+CREATE TABLE `subscription` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `plan_id` varchar(20) NOT NULL,
+  `token_id` varchar(200) NOT NULL,
+  `start_date`  datetime NOT NULL ,
+  `end_date`  datetime NULL,
+  `modified` datetime NOT NULL,
+  `created` timestamp DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (user_id) 
+        REFERENCES user(id)
+) ENGINE=InnoDB AUTO_INCREMENT=1001 DEFAULT CHARSET=latin1;
