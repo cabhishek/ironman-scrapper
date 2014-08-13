@@ -134,7 +134,7 @@ CREATE TABLE `athlete_races` (
 
 CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(30) NOT NULL UNIQUE,
+  `username` varchar(30) NULL,
   `first_name` varchar(30) NULL,
   `last_name` varchar(30) NULL,
   `email` varchar(75) NOT NULL UNIQUE,
@@ -143,7 +143,7 @@ CREATE TABLE `user` (
   `modified` datetime NOT NULL,
   `created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  KEY `user_fbfc09f1` (`username`)
+  KEY `email_fbfc09f1` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `subscription` (
@@ -156,6 +156,6 @@ CREATE TABLE `subscription` (
   `modified` datetime NOT NULL,
   `created` timestamp DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (user_id) 
+  FOREIGN KEY (user_id)
         REFERENCES user(id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1001 DEFAULT CHARSET=latin1;
