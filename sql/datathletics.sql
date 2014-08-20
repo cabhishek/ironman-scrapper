@@ -140,6 +140,7 @@ CREATE TABLE `user` (
   `email` varchar(75) NOT NULL UNIQUE,
   `password` varchar(255) NULL,
   `athlete_id` int(11) NULL,
+  `zipcode` int(11) NULL,
   `modified` datetime NOT NULL,
   `created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
