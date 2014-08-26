@@ -54,4 +54,7 @@ module.exports = [
     "Ironman 70.3 South Africa",
     "Ironman 70.3 Geelong",
     "Ironman 70.3 Panama",
+    "Ironman 70.3 Putrajaya",
+    "Ironman 70.3 Brasilia",
+    "Ironman 70.3 Victoria"
 ]

@@ -29,4 +29,7 @@ module.exports = [
      "Ironman Lanzarote",
      "Ironman Texas",
      "Ironman Los Cabos",
+     "Ironman Asia Pacific Championships",
+     "Ironman Brasil",
+     "Ironman Colorado"
 ];
