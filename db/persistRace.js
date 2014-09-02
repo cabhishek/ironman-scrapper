@@ -7,7 +7,7 @@ var db = require('./initialize')(),
     argv = require('minimist')(process.argv.slice(2)),
     Log = require('log'),
     log = new Log('info'),
-    async = require('async')
+    async = require('async');
 
 // Function to presist race data
 // years if passed are in comma seperated format e.g "2013,2012,1998"

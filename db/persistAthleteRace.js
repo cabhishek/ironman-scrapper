@@ -3,7 +3,7 @@ var AthleteRace = require('../models/athleteRace'),
     Race = require('../models/race'),
     _ = require('underscore'),
     Log = require('log'),
-    log = new Log('info')
+    log = new Log('info');
 
 
 module.exports = function persistAthleteRace(raceData, callback) {

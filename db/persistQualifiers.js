@@ -6,7 +6,7 @@ var db = require('./initialize')(),
     _ = require('underscore'),
     Log = require('log'),
     log = new Log('info'),
-    async = require('async')
+    async = require('async');
 
 (function() {
 
