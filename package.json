@@ -2,22 +2,20 @@
   "name": "Datathletics",
   "version": "0.0.1",
   "description": "Race predictions based on data",
-  "main": "downloadHtml.js",
+  "main": "download.js",
   "dependencies": {
     "async": "~0.2.9",
+    "bookshelf": "~0.6.1",
     "cheerio": "~0.12.3",
-    "client-http": "~0.0.5",
+    "csv-streamify": "~0.9.0",
+    "log": "*",
+    "minimist": "^1.1.0",
     "mkdirp": "~0.3.5",
+    "mysql": "~2.0.0-rc2",
+    "request": "~2.27.0",
     "underscore": "~1.5.2",
     "underscore.string": "~2.3.3",
-    "node.io": "~0.5.1",
-    "request": "~2.27.0",
-    "log": "*",
-    "bookshelf": "~0.6.1",
-    "mysql": "~2.0.0-rc2",
-    "csv-streamify": "~0.9.0",
-    "q": "~0.9.7",
-    "bluebird": "~0.11.6-0"
+    "node-curl": "~0.3.1"
   },
   "devDependencies": {},
   "scripts": {
@@ -25,7 +23,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@bitbucket.org:cabhishek/datathletics.git"
+    "url": "git@bitbucket.org:datathletics/scrapper.git"
   },
   "author": "Abhishek Kapatkar",
   "license": "MIT"

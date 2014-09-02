@@ -1,26 +1,26 @@
 var db = require('./db/initialize')(),
     persistAthleteRace = require('./db/persistAthleteRace'),
     raceHistory = require('./raceConfig/raceHistory'),
-    scrape = require('./scraper/scrape'),
+    scrape = require('./scraper/scraper'),
     helper = require('./utils/helper'),
     _ = require('underscore'),
     async = require('async'),
-    util = require('util'),
     fs = require('fs'),
+    argv = require('minimist')(process.argv.slice(2)),
     Log = require('log'),
     log = new Log('info');
 
-(function () {
+// Main function to kick start things
+// years if passed are in comma seperated format e.g "2013,2012,1998"
+(function() {
 
-    var raceName = process.argv[2] || "Ironman Florida",
-        races = raceHistory(raceName),
-        //Comma sperated list "2009,2010"
-        years = process.argv[3];
+    if (!argv.name)
+        throw "Enter a valid race name"
 
-    log.info("RaceName =>%s", raceName);
+    var races = raceHistory(argv.name)
 
-    if (years)
-        races = helper.filterByYear(races, years);
+    if (argv.years)
+        races = helper.filterByYear(races, argv.years)
 
     async.each(races, createRacePages, function(err) {
         if (err) throw err;
