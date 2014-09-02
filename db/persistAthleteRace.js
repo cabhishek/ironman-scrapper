@@ -3,7 +3,7 @@ var AthleteRace = require('../models/athleteRace'),
     Race = require('../models/race'),
     _ = require('underscore'),
     Log = require('log'),
-    log = new Log('info');
+    log = new Log('info')
 
 
 module.exports = function persistAthleteRace(raceData, callback) {
@@ -12,25 +12,25 @@ module.exports = function persistAthleteRace(raceData, callback) {
         'athlinks_id': raceData.athlinksId,
         'first_name': raceData.firstName,
         'last_name': raceData.lastName
-    });
+    })
 
     athlete.fetch()
         .then(function(athlete) {
 
             if (athlete) {
-                log.info("Found athlete %s %s", athlete.get('first_name'), athlete.get('last_name'));
-                persistAthleteRaceData(athlete, raceData, callback);
+                log.info("Found athlete %s %s", athlete.get('first_name'), athlete.get('last_name'))
+                persistAthleteRaceData(athlete, raceData, callback)
 
             } else {
-                createAthlete(raceData, callback);
+                createAthlete(raceData, callback)
             }
         }).
-    catch (function(e) {
-        log.info(e.message);
+    catch(function(e) {
+        log.info(e.message)
 
-        callback();
-    });
-};
+        callback()
+    })
+}
 
 function createAthlete(raceData, callback) {
 
@@ -40,15 +40,15 @@ function createAthlete(raceData, callback) {
         athlinks_id: raceData.athlinksId,
 
     }).save().then(function(athlete) {
-        log.info("Created athlete %s %s %s", raceData.athlinksId, raceData.firstName, raceData.lastName);
+        log.info("Created athlete %s %s %s", raceData.athlinksId, raceData.firstName, raceData.lastName)
 
-        persistAthleteRaceData(athlete, raceData, callback);
+        persistAthleteRaceData(athlete, raceData, callback)
     }).
-    catch (function(e) {
-        log.info(e.message);
+    catch(function(e) {
+        log.info(e.message)
 
-        callback();
-    });
+        callback()
+    })
 }
 
 function persistAthleteRaceData(athlete, raceData, callback) {
@@ -57,12 +57,12 @@ function persistAthleteRaceData(athlete, raceData, callback) {
         name: raceData.name,
         athlinks_event_id: raceData.eventId,
         athlinks_course_id: raceData.courseId
-    });
+    })
 
     race.on('fetched', function(race) {
 
         if (!race)
-            throw "Failed to get race data";
+            throw "Failed to get race data"
 
         AthleteRace.forge({
             athlete_id: athlete.get('id'),
@@ -93,17 +93,17 @@ function persistAthleteRaceData(athlete, raceData, callback) {
             final_time: raceData.finalTime
 
         }).save().then(function() {
-            log.info("Athlete race data saved for %s %s", athlete.get('first_name'), athlete.get('last_name'));
+            log.info("Athlete race data saved for %s %s", athlete.get('first_name'), athlete.get('last_name'))
 
-            callback();
+            callback()
         }).
-        catch (function(e) {
-            log.info(e.message);
+        catch(function(e) {
+            log.info(e.message)
 
-            callback();
-        });
+            callback()
+        })
 
-    });
+    })
 
-    race.fetch();
+    race.fetch()
 }

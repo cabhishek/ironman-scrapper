@@ -5,46 +5,46 @@ var db = require('./initialize')(),
     _ = require('underscore'),
     Log = require('log'),
     log = new Log('info'),
-    async = require('async');
+    async = require('async')
 
 (function() {
 
     readCsv('race_attributes_data.csv', function(err, results) {
 
-        log.info("Total race attributes data count =>%s", results.length);
+        log.info("Total race attributes data count =>%s", results.length)
 
         async.each(results, persist, function(err) {
-            if (err) throw err;
+            if (err) throw err
 
-            process.exit(0);
+            process.exit(0)
 
-        });
-    });
+        })
+    })
 
-})();
+})()
 
 function persist(raceAttribute, callback) {
 
     var names = raceAttribute.name.split(" "),
         race_name = _.first(names, names.length - 1).join(' '),
-        race_year = _.last(names);
+        race_year = _.last(names)
 
-    log.info("Fetching race =>%s year=>%s", race_name, race_year);
+    log.info("Fetching race =>%s year=>%s", race_name, race_year)
 
     var race = new Race({
         name: race_name,
         year: race_year
-    });
+    })
 
-    log.info("Before ->%s", (raceAttribute.startingElevation));
-    log.info("After ->%s", _clean(raceAttribute.startingElevation));
+    log.info("Before ->%s", (raceAttribute.startingElevation))
+    log.info("After ->%s", _clean(raceAttribute.startingElevation))
 
     race.fetch().then(function(race) {
 
         if (race) {
 
-            log.info("Found data for =>%s", race_name);
-            log.info("qualifier id =>%s", race.get('qualifier_id'));
+            log.info("Found data for =>%s", race_name)
+            log.info("qualifier id =>%s", race.get('qualifier_id'))
 
             var data = {
 
@@ -97,36 +97,36 @@ function persist(raceAttribute, callback) {
                 max_elevation_run: _clean(raceAttribute.maxElevationRun),
                 gross_elevation_gain_run: _clean(raceAttribute.grossElevationGainRun)
 
-            };
+            }
 
             race.save(data, {
                 patch: true
             }).then(function() {
 
-                log.info('Race =>%s updated with attributes !!', raceAttribute.name);
+                log.info('Race =>%s updated with attributes !!', raceAttribute.name)
 
-                callback();
+                callback()
             }).
-            catch (function(e) {
-                log.info(e.message);
+            catch(function(e) {
+                log.info(e.message)
 
-                callback();
-            });
+                callback()
+            })
 
         } else {
 
-            log.info("Race %s not found skipping !!", race_name);
+            log.info("Race %s not found skipping !!", race_name)
 
-            callback();
+            callback()
         }
     }).
-    catch (function(e) {
-        log.info(e.message);
-        callback();
-    });
+    catch(function(e) {
+        log.info(e.message)
+        callback()
+    })
 }
 
-function _clean(value){
+function _clean(value) {
 
-    return value.replace(",","");
+    return value.replace(",", "")
 }

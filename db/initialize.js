@@ -1,4 +1,4 @@
-var Bookshelf = require('bookshelf');
+var Bookshelf = require('bookshelf')
 
 function init(){
     Bookshelf.Mysql = Bookshelf.initialize({
@@ -18,7 +18,7 @@ function init(){
             database: 'datathletics',
             charset: 'utf8'
         }
-    });
+    })
 }
 
-module.exports = init;
+module.exports = init

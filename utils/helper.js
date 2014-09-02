@@ -23,6 +23,9 @@ function createPages(race) {
 function filterByYear(races, years) {
     var temp = [];
 
+    if (!years)
+        throw "Years is not a comma separated list. Please check it."
+
     _.each(years.split(','), function(year) {
         temp.push(_.where(races, {
             year: parseInt(year, 0)

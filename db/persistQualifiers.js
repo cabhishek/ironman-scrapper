@@ -6,38 +6,38 @@ var db = require('./initialize')(),
     _ = require('underscore'),
     Log = require('log'),
     log = new Log('info'),
-    async = require('async');
+    async = require('async')
 
 (function() {
 
     readCsv('qualifier_data.csv', function(err, results) {
 
-        log.info("Total qualifier data count =>%s" % results.length);
+        log.info("Total qualifier data count =>%s" % results.length)
 
         async.each(results, persist, function(err) {
-            if (err) throw err;
+            if (err) throw err
 
-            process.exit(0);
+            process.exit(0)
 
-        });
-    });
+        })
+    })
 
-})();
+})()
 
 function persist(qualifier, callback) {
 
     var race = new Race({
         name: qualifier.name,
-    });
+    })
 
-    log.info("Fetching race =>%s", qualifier.name);
+    log.info("Fetching race =>%s", qualifier.name)
 
     race.fetch().then(function(race) {
 
         if (race) {
 
-            log.info("Found data for =>%s", qualifier.name);
-            log.info("Qualifier id =>%s", race.get('qualifier_id'));
+            log.info("Found data for =>%s", qualifier.name)
+            log.info("Qualifier id =>%s", race.get('qualifier_id'))
 
             var data = {
 
@@ -88,23 +88,23 @@ function persist(qualifier, callback) {
                 starting_elevation_run: qualifier.startingElevationRun,
                 max_elevation_run: qualifier.maxElevationRun,
                 gross_elevation_gain_run: qualifier.grossElevationGainRun
-            };
+            }
 
             Qualifier.forge(data).save().then(function() {
-                log.info('Qualifier Race =>%s updated !!', qualifier.name);
+                log.info('Qualifier Race =>%s updated !!', qualifier.name)
 
-                callback();
+                callback()
             }).
             catch (function(e) {
-                log.info(e.message);
+                log.info(e.message)
 
-                callback();
-            });
+                callback()
+            })
 
         } else {
 
-            log.info("Race %s not found skipping !!", qualifier.name);
-            callback();
+            log.info("Race %s not found skipping !!", qualifier.name)
+            callback()
         }
-    });
+    })
 }
