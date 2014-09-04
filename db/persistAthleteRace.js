@@ -1,17 +1,17 @@
 var AthleteRace = require('../models/athleteRace'),
-    Athlete = require('../models/athlete'),
-    Race = require('../models/race'),
-    _ = require('underscore'),
-    Log = require('log'),
-    log = new Log('info');
+    Athlete     = require('../models/athlete'),
+    Race        = require('../models/race'),
+    _           = require('underscore'),
+    Log         = require('log'),
+    log         = new Log('info');
 
 
 module.exports = function persistAthleteRace(raceData, callback) {
 
     var athlete = new Athlete({
-        'athlinks_id': raceData.athlinksId,
-        'first_name': raceData.firstName,
-        'last_name': raceData.lastName
+        'athlinks_id' : raceData.athlinksId,
+        'first_name'  : raceData.firstName,
+        'last_name'   : raceData.lastName
     })
 
     athlete.fetch()
@@ -35,9 +35,9 @@ module.exports = function persistAthleteRace(raceData, callback) {
 function createAthlete(raceData, callback) {
 
     Athlete.forge({
-        first_name: raceData.firstName,
-        last_name: raceData.lastName,
-        athlinks_id: raceData.athlinksId,
+        first_name  : raceData.firstName,
+        last_name   : raceData.lastName,
+        athlinks_id : raceData.athlinksId,
 
     }).save().then(function(athlete) {
         log.info("Created athlete %s %s %s", raceData.athlinksId, raceData.firstName, raceData.lastName)
@@ -65,32 +65,32 @@ function persistAthleteRaceData(athlete, raceData, callback) {
             throw "Failed to get race data"
 
         AthleteRace.forge({
-            athlete_id: athlete.get('id'),
-            race_id: race.get('id'),
+            athlete_id:   athlete.get('id'),
+            race_id:      race.get('id'),
 
-            ago: raceData.ago,
-            claimed: raceData.claimed,
-            m_f: raceData.m_f,
-            age: raceData.age,
-            bib: raceData.bib,
+            ago:          raceData.ago,
+            claimed:      raceData.claimed,
+            m_f:          raceData.m_f,
+            age:          raceData.age,
+            bib:          raceData.bib,
 
-            swim_time: raceData.swimTime,
-            swim_pace: raceData.swimPace,
-            swim_ago: raceData.swimAgo,
+            swim_time:    raceData.swimTime,
+            swim_pace:    raceData.swimPace,
+            swim_ago:     raceData.swimAgo,
 
-            t1: raceData.t1,
+            t1:           raceData.t1,
 
-            cycle_time: raceData.cycleTime,
-            cycle_speed: raceData.cycleSpeed,
-            cycle_ago: raceData.cycleAgo,
+            cycle_time:   raceData.cycleTime,
+            cycle_speed:  raceData.cycleSpeed,
+            cycle_ago:    raceData.cycleAgo,
 
-            t2: raceData.t2,
+            t2:           raceData.t2,
 
-            run_time: raceData.runTime,
-            run_pace: raceData.runPace,
-            run_ago: raceData.runAgo,
+            run_time:     raceData.runTime,
+            run_pace:     raceData.runPace,
+            run_ago:      raceData.runAgo,
 
-            final_time: raceData.finalTime
+            final_time:   raceData.finalTime
 
         }).save().then(function() {
             log.info("Athlete race data saved for %s %s", athlete.get('first_name'), athlete.get('last_name'))
