@@ -1,5 +1,5 @@
 {
-  "name": "Datathletics",
+  "name": "Scrapper",
   "version": "0.0.1",
   "description": "Race predictions based on data",
   "main": "download.js",
