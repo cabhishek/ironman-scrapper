@@ -1,4 +1,4 @@
-Ironman Scrapper
+Ironman Race data scraper
 ===
 
 #### Pre-requisite ####
