@@ -1,10 +1,8 @@
-var Bookshelf = require('bookshelf').Mysql
+var Bookshelf = require("bookshelf").Mysql;
 
 var Athlete = Bookshelf.Model.extend({
-    tableName: 'athletes',
+  tableName: "athletes",
+  hasTimestamps: [ "created", "modified" ]
+});
 
-    hasTimestamps: ['created', 'modified'],
-
-})
-
-module.exports = Athlete
+module.exports = Athlete;

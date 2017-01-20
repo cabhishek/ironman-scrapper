@@ -1,15 +1,15 @@
-var Bookshelf = require('bookshelf')
+var Bookshelf = require("bookshelf");
 
-function init(){
-    Bookshelf.Mysql = Bookshelf.initialize({
-        client: 'mysql',
-        connection: {
-            host: '127.0.0.1',
-            user: 'root',
-            database: 'datathletics',
-            charset: 'utf8'
-        }
-    })
+function init() {
+  Bookshelf.Mysql = Bookshelf.initialize({
+    client: "mysql",
+    connection: {
+      host: "127.0.0.1",
+      user: "root",
+      database: "datathletics",
+      charset: "utf8"
+    }
+  });
 }
 
-module.exports = init
+module.exports = init;
